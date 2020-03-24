@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrdh.dao.lorawanUser.HmNormaldecodedataMapper" >
+  <resultMap id="BaseResultMap" type="com.zrdh.pojo.lorawanUser.HmNormaldecodedata" >
+    <id column="DataId" property="dataid" jdbcType="INTEGER" />
+    <id column="DecodeTime" property="decodetime" jdbcType="TIMESTAMP" />
+    <result column="DeviceName" property="devicename" jdbcType="VARCHAR" />
+    <result column="DevEui" property="deveui" jdbcType="VARCHAR" />
+    <result column="GatewayId" property="gatewayid" jdbcType="VARCHAR" />
+    <result column="GatewayName" property="gatewayname" jdbcType="VARCHAR" />
+    <result column="Voltage" property="voltage" jdbcType="VARCHAR" />
+    <result column="EquipmentType" property="equipmenttype" jdbcType="VARCHAR" />
+    <result column="MeterNo" property="meterno" jdbcType="VARCHAR" />
+    <result column="UserCode" property="usercode" jdbcType="VARCHAR" />
+    <result column="CurrentColdNumber" property="currentcoldnumber" jdbcType="REAL" />
+    <result column="CurrentHeatNumber" property="currentheatnumber" jdbcType="REAL" />
+    <result column="OriginCurrentHeatNumber" property="origincurrentheatnumber" jdbcType="REAL" />
+    <result column="HeatPower" property="heatpower" jdbcType="REAL" />
+    <result column="FlowRate" property="flowrate" jdbcType="REAL" />
+    <result column="TotalFlow" property="totalflow" jdbcType="REAL" />
+    <result column="SupplyWaterTemperature" property="supplywatertemperature" jdbcType="REAL" />
+    <result column="ReturnWaterTemperature" property="returnwatertemperature" jdbcType="REAL" />
+    <result column="CurrentTime" property="currenttime" jdbcType="VARCHAR" />
+    <result column="Wdc" property="wdc" jdbcType="REAL" />
+    <result column="Status1" property="status1" jdbcType="VARCHAR" />
+    <result column="Status2" property="status2" jdbcType="VARCHAR" />
+    <result column="RegFlag" property="regflag" jdbcType="VARCHAR" />
+    <result column="Unit" property="unit" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DataId, DecodeTime, DeviceName, DevEui, GatewayId, GatewayName, Voltage, EquipmentType, 
+    MeterNo, UserCode, CurrentColdNumber, CurrentHeatNumber, OriginCurrentHeatNumber, 
+    HeatPower, FlowRate, TotalFlow, SupplyWaterTemperature, ReturnWaterTemperature, CurrentTime, 
+    Wdc, Status1, Status2, RegFlag, Unit
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zrdh.pojo.lorawanUser.HmNormaldecodedataKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from HM_NormalDecodeData
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and DecodeTime = #{decodetime,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zrdh.pojo.lorawanUser.HmNormaldecodedataKey" >
+    delete from HM_NormalDecodeData
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and DecodeTime = #{decodetime,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="com.zrdh.pojo.lorawanUser.HmNormaldecodedata" >
+    insert into HM_NormalDecodeData (DataId, DecodeTime, DeviceName, 
+      DevEui, GatewayId, GatewayName, 
+      Voltage, EquipmentType, MeterNo, 
+      UserCode, CurrentColdNumber, CurrentHeatNumber, 
+      OriginCurrentHeatNumber, HeatPower, FlowRate, 
+      TotalFlow, SupplyWaterTemperature, ReturnWaterTemperature, 
+      CurrentTime, Wdc, Status1, 
+      Status2, RegFlag, Unit
+      )
+    values (#{dataid,jdbcType=INTEGER}, #{decodetime,jdbcType=TIMESTAMP}, #{devicename,jdbcType=VARCHAR}, 
+      #{deveui,jdbcType=VARCHAR}, #{gatewayid,jdbcType=VARCHAR}, #{gatewayname,jdbcType=VARCHAR}, 
+      #{voltage,jdbcType=VARCHAR}, #{equipmenttype,jdbcType=VARCHAR}, #{meterno,jdbcType=VARCHAR}, 
+      #{usercode,jdbcType=VARCHAR}, #{currentcoldnumber,jdbcType=REAL}, #{currentheatnumber,jdbcType=REAL}, 
+      #{origincurrentheatnumber,jdbcType=REAL}, #{heatpower,jdbcType=REAL}, #{flowrate,jdbcType=REAL}, 
+      #{totalflow,jdbcType=REAL}, #{supplywatertemperature,jdbcType=REAL}, #{returnwatertemperature,jdbcType=REAL}, 
+      #{currenttime,jdbcType=VARCHAR}, #{wdc,jdbcType=REAL}, #{status1,jdbcType=VARCHAR}, 
+      #{status2,jdbcType=VARCHAR}, #{regflag,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zrdh.pojo.lorawanUser.HmNormaldecodedata" >
+    insert into HM_NormalDecodeData
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dataid != null" >
+        DataId,
+      </if>
+      <if test="decodetime != null" >
+        DecodeTime,
+      </if>
+      <if test="devicename != null" >
+        DeviceName,
+      </if>
+      <if test="deveui != null" >
+        DevEui,
+      </if>
+      <if test="gatewayid != null" >
+        GatewayId,
+      </if>
+      <if test="gatewayname != null" >
+        GatewayName,
+      </if>
+      <if test="voltage != null" >
+        Voltage,
+      </if>
+      <if test="equipmenttype != null" >
+        EquipmentType,
+      </if>
+      <if test="meterno != null" >
+        MeterNo,
+      </if>
+      <if test="usercode != null" >
+        UserCode,
+      </if>
+      <if test="currentcoldnumber != null" >
+        CurrentColdNumber,
+      </if>
+      <if test="currentheatnumber != null" >
+        CurrentHeatNumber,
+      </if>
+      <if test="origincurrentheatnumber != null" >
+        OriginCurrentHeatNumber,
+      </if>
+      <if test="heatpower != null" >
+        HeatPower,
+      </if>
+      <if test="flowrate != null" >
+        FlowRate,
+      </if>
+      <if test="totalflow != null" >
+        TotalFlow,
+      </if>
+      <if test="supplywatertemperature != null" >
+        SupplyWaterTemperature,
+      </if>
+      <if test="returnwatertemperature != null" >
+        ReturnWaterTemperature,
+      </if>
+      <if test="currenttime != null" >
+        CurrentTime,
+      </if>
+      <if test="wdc != null" >
+        Wdc,
+      </if>
+      <if test="status1 != null" >
+        Status1,
+      </if>
+      <if test="status2 != null" >
+        Status2,
+      </if>
+      <if test="regflag != null" >
+        RegFlag,
+      </if>
+      <if test="unit != null" >
+        Unit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dataid != null" >
+        #{dataid,jdbcType=INTEGER},
+      </if>
+      <if test="decodetime != null" >
+        #{decodetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devicename != null" >
+        #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="deveui != null" >
+        #{deveui,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayid != null" >
+        #{gatewayid,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayname != null" >
+        #{gatewayname,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null" >
+        #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmenttype != null" >
+        #{equipmenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="meterno != null" >
+        #{meterno,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null" >
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="currentcoldnumber != null" >
+        #{currentcoldnumber,jdbcType=REAL},
+      </if>
+      <if test="currentheatnumber != null" >
+        #{currentheatnumber,jdbcType=REAL},
+      </if>
+      <if test="origincurrentheatnumber != null" >
+        #{origincurrentheatnumber,jdbcType=REAL},
+      </if>
+      <if test="heatpower != null" >
+        #{heatpower,jdbcType=REAL},
+      </if>
+      <if test="flowrate != null" >
+        #{flowrate,jdbcType=REAL},
+      </if>
+      <if test="totalflow != null" >
+        #{totalflow,jdbcType=REAL},
+      </if>
+      <if test="supplywatertemperature != null" >
+        #{supplywatertemperature,jdbcType=REAL},
+      </if>
+      <if test="returnwatertemperature != null" >
+        #{returnwatertemperature,jdbcType=REAL},
+      </if>
+      <if test="currenttime != null" >
+        #{currenttime,jdbcType=VARCHAR},
+      </if>
+      <if test="wdc != null" >
+        #{wdc,jdbcType=REAL},
+      </if>
+      <if test="status1 != null" >
+        #{status1,jdbcType=VARCHAR},
+      </if>
+      <if test="status2 != null" >
+        #{status2,jdbcType=VARCHAR},
+      </if>
+      <if test="regflag != null" >
+        #{regflag,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zrdh.pojo.lorawanUser.HmNormaldecodedata" >
+    update HM_NormalDecodeData
+    <set >
+      <if test="devicename != null" >
+        DeviceName = #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="deveui != null" >
+        DevEui = #{deveui,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayid != null" >
+        GatewayId = #{gatewayid,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayname != null" >
+        GatewayName = #{gatewayname,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null" >
+        Voltage = #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmenttype != null" >
+        EquipmentType = #{equipmenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="meterno != null" >
+        MeterNo = #{meterno,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null" >
+        UserCode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="currentcoldnumber != null" >
+        CurrentColdNumber = #{currentcoldnumber,jdbcType=REAL},
+      </if>
+      <if test="currentheatnumber != null" >
+        CurrentHeatNumber = #{currentheatnumber,jdbcType=REAL},
+      </if>
+      <if test="origincurrentheatnumber != null" >
+        OriginCurrentHeatNumber = #{origincurrentheatnumber,jdbcType=REAL},
+      </if>
+      <if test="heatpower != null" >
+        HeatPower = #{heatpower,jdbcType=REAL},
+      </if>
+      <if test="flowrate != null" >
+        FlowRate = #{flowrate,jdbcType=REAL},
+      </if>
+      <if test="totalflow != null" >
+        TotalFlow = #{totalflow,jdbcType=REAL},
+      </if>
+      <if test="supplywatertemperature != null" >
+        SupplyWaterTemperature = #{supplywatertemperature,jdbcType=REAL},
+      </if>
+      <if test="returnwatertemperature != null" >
+        ReturnWaterTemperature = #{returnwatertemperature,jdbcType=REAL},
+      </if>
+      <if test="currenttime != null" >
+        CurrentTime = #{currenttime,jdbcType=VARCHAR},
+      </if>
+      <if test="wdc != null" >
+        Wdc = #{wdc,jdbcType=REAL},
+      </if>
+      <if test="status1 != null" >
+        Status1 = #{status1,jdbcType=VARCHAR},
+      </if>
+      <if test="status2 != null" >
+        Status2 = #{status2,jdbcType=VARCHAR},
+      </if>
+      <if test="regflag != null" >
+        RegFlag = #{regflag,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        Unit = #{unit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and DecodeTime = #{decodetime,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zrdh.pojo.lorawanUser.HmNormaldecodedata" >
+    update HM_NormalDecodeData
+    set DeviceName = #{devicename,jdbcType=VARCHAR},
+      DevEui = #{deveui,jdbcType=VARCHAR},
+      GatewayId = #{gatewayid,jdbcType=VARCHAR},
+      GatewayName = #{gatewayname,jdbcType=VARCHAR},
+      Voltage = #{voltage,jdbcType=VARCHAR},
+      EquipmentType = #{equipmenttype,jdbcType=VARCHAR},
+      MeterNo = #{meterno,jdbcType=VARCHAR},
+      UserCode = #{usercode,jdbcType=VARCHAR},
+      CurrentColdNumber = #{currentcoldnumber,jdbcType=REAL},
+      CurrentHeatNumber = #{currentheatnumber,jdbcType=REAL},
+      OriginCurrentHeatNumber = #{origincurrentheatnumber,jdbcType=REAL},
+      HeatPower = #{heatpower,jdbcType=REAL},
+      FlowRate = #{flowrate,jdbcType=REAL},
+      TotalFlow = #{totalflow,jdbcType=REAL},
+      SupplyWaterTemperature = #{supplywatertemperature,jdbcType=REAL},
+      ReturnWaterTemperature = #{returnwatertemperature,jdbcType=REAL},
+      CurrentTime = #{currenttime,jdbcType=VARCHAR},
+      Wdc = #{wdc,jdbcType=REAL},
+      Status1 = #{status1,jdbcType=VARCHAR},
+      Status2 = #{status2,jdbcType=VARCHAR},
+      RegFlag = #{regflag,jdbcType=VARCHAR},
+      Unit = #{unit,jdbcType=VARCHAR}
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and DecodeTime = #{decodetime,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

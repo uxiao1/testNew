@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrdh.dao.lorawanUser.HmOrigindataMapper" >
+  <resultMap id="BaseResultMap" type="com.zrdh.pojo.lorawanUser.HmOrigindata" >
+    <id column="DataId" property="dataid" jdbcType="INTEGER" />
+    <id column="ReceiveTime" property="receivetime" jdbcType="TIMESTAMP" />
+    <result column="ApplicationId" property="applicationid" jdbcType="VARCHAR" />
+    <result column="ApplicationName" property="applicationname" jdbcType="VARCHAR" />
+    <result column="DeviceName" property="devicename" jdbcType="VARCHAR" />
+    <result column="DevEui" property="deveui" jdbcType="VARCHAR" />
+    <result column="GatewayId" property="gatewayid" jdbcType="VARCHAR" />
+    <result column="GatewayName" property="gatewayname" jdbcType="VARCHAR" />
+    <result column="GatewayTime" property="gatewaytime" jdbcType="VARCHAR" />
+    <result column="Rssi" property="rssi" jdbcType="VARCHAR" />
+    <result column="LoraSnr" property="lorasnr" jdbcType="VARCHAR" />
+    <result column="Latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="Longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="Altitude" property="altitude" jdbcType="VARCHAR" />
+    <result column="SendFrequence" property="sendfrequence" jdbcType="VARCHAR" />
+    <result column="SendDr" property="senddr" jdbcType="VARCHAR" />
+    <result column="Adr" property="adr" jdbcType="VARCHAR" />
+    <result column="Fcnt" property="fcnt" jdbcType="VARCHAR" />
+    <result column="Fport" property="fport" jdbcType="VARCHAR" />
+    <result column="Data" property="data" jdbcType="VARCHAR" />
+    <result column="ObjectBattery" property="objectbattery" jdbcType="VARCHAR" />
+    <result column="ObjectType" property="objecttype" jdbcType="VARCHAR" />
+    <result column="ObjectValue" property="objectvalue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DataId, ReceiveTime, ApplicationId, ApplicationName, DeviceName, DevEui, GatewayId, 
+    GatewayName, GatewayTime, Rssi, LoraSnr, Latitude, Longitude, Altitude, SendFrequence, 
+    SendDr, Adr, Fcnt, Fport, Data, ObjectBattery, ObjectType, ObjectValue
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zrdh.pojo.lorawanUser.HmOrigindataKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from HM_OriginData
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and ReceiveTime = #{receivetime,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zrdh.pojo.lorawanUser.HmOrigindataKey" >
+    delete from HM_OriginData
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and ReceiveTime = #{receivetime,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="com.zrdh.pojo.lorawanUser.HmOrigindata" >
+    insert into HM_OriginData (DataId, ReceiveTime, ApplicationId, 
+      ApplicationName, DeviceName, DevEui, 
+      GatewayId, GatewayName, GatewayTime, 
+      Rssi, LoraSnr, Latitude, 
+      Longitude, Altitude, SendFrequence, 
+      SendDr, Adr, Fcnt, 
+      Fport, Data, ObjectBattery, 
+      ObjectType, ObjectValue)
+    values (#{dataid,jdbcType=INTEGER}, #{receivetime,jdbcType=TIMESTAMP}, #{applicationid,jdbcType=VARCHAR}, 
+      #{applicationname,jdbcType=VARCHAR}, #{devicename,jdbcType=VARCHAR}, #{deveui,jdbcType=VARCHAR}, 
+      #{gatewayid,jdbcType=VARCHAR}, #{gatewayname,jdbcType=VARCHAR}, #{gatewaytime,jdbcType=VARCHAR}, 
+      #{rssi,jdbcType=VARCHAR}, #{lorasnr,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{longitude,jdbcType=VARCHAR}, #{altitude,jdbcType=VARCHAR}, #{sendfrequence,jdbcType=VARCHAR}, 
+      #{senddr,jdbcType=VARCHAR}, #{adr,jdbcType=VARCHAR}, #{fcnt,jdbcType=VARCHAR}, 
+      #{fport,jdbcType=VARCHAR}, #{data,jdbcType=VARCHAR}, #{objectbattery,jdbcType=VARCHAR}, 
+      #{objecttype,jdbcType=VARCHAR}, #{objectvalue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zrdh.pojo.lorawanUser.HmOrigindata" >
+    insert into HM_OriginData
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dataid != null" >
+        DataId,
+      </if>
+      <if test="receivetime != null" >
+        ReceiveTime,
+      </if>
+      <if test="applicationid != null" >
+        ApplicationId,
+      </if>
+      <if test="applicationname != null" >
+        ApplicationName,
+      </if>
+      <if test="devicename != null" >
+        DeviceName,
+      </if>
+      <if test="deveui != null" >
+        DevEui,
+      </if>
+      <if test="gatewayid != null" >
+        GatewayId,
+      </if>
+      <if test="gatewayname != null" >
+        GatewayName,
+      </if>
+      <if test="gatewaytime != null" >
+        GatewayTime,
+      </if>
+      <if test="rssi != null" >
+        Rssi,
+      </if>
+      <if test="lorasnr != null" >
+        LoraSnr,
+      </if>
+      <if test="latitude != null" >
+        Latitude,
+      </if>
+      <if test="longitude != null" >
+        Longitude,
+      </if>
+      <if test="altitude != null" >
+        Altitude,
+      </if>
+      <if test="sendfrequence != null" >
+        SendFrequence,
+      </if>
+      <if test="senddr != null" >
+        SendDr,
+      </if>
+      <if test="adr != null" >
+        Adr,
+      </if>
+      <if test="fcnt != null" >
+        Fcnt,
+      </if>
+      <if test="fport != null" >
+        Fport,
+      </if>
+      <if test="data != null" >
+        Data,
+      </if>
+      <if test="objectbattery != null" >
+        ObjectBattery,
+      </if>
+      <if test="objecttype != null" >
+        ObjectType,
+      </if>
+      <if test="objectvalue != null" >
+        ObjectValue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dataid != null" >
+        #{dataid,jdbcType=INTEGER},
+      </if>
+      <if test="receivetime != null" >
+        #{receivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicationid != null" >
+        #{applicationid,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationname != null" >
+        #{applicationname,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="deveui != null" >
+        #{deveui,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayid != null" >
+        #{gatewayid,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayname != null" >
+        #{gatewayname,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewaytime != null" >
+        #{gatewaytime,jdbcType=VARCHAR},
+      </if>
+      <if test="rssi != null" >
+        #{rssi,jdbcType=VARCHAR},
+      </if>
+      <if test="lorasnr != null" >
+        #{lorasnr,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="altitude != null" >
+        #{altitude,jdbcType=VARCHAR},
+      </if>
+      <if test="sendfrequence != null" >
+        #{sendfrequence,jdbcType=VARCHAR},
+      </if>
+      <if test="senddr != null" >
+        #{senddr,jdbcType=VARCHAR},
+      </if>
+      <if test="adr != null" >
+        #{adr,jdbcType=VARCHAR},
+      </if>
+      <if test="fcnt != null" >
+        #{fcnt,jdbcType=VARCHAR},
+      </if>
+      <if test="fport != null" >
+        #{fport,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="objectbattery != null" >
+        #{objectbattery,jdbcType=VARCHAR},
+      </if>
+      <if test="objecttype != null" >
+        #{objecttype,jdbcType=VARCHAR},
+      </if>
+      <if test="objectvalue != null" >
+        #{objectvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zrdh.pojo.lorawanUser.HmOrigindata" >
+    update HM_OriginData
+    <set >
+      <if test="applicationid != null" >
+        ApplicationId = #{applicationid,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationname != null" >
+        ApplicationName = #{applicationname,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        DeviceName = #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="deveui != null" >
+        DevEui = #{deveui,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayid != null" >
+        GatewayId = #{gatewayid,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayname != null" >
+        GatewayName = #{gatewayname,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewaytime != null" >
+        GatewayTime = #{gatewaytime,jdbcType=VARCHAR},
+      </if>
+      <if test="rssi != null" >
+        Rssi = #{rssi,jdbcType=VARCHAR},
+      </if>
+      <if test="lorasnr != null" >
+        LoraSnr = #{lorasnr,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        Latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        Longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="altitude != null" >
+        Altitude = #{altitude,jdbcType=VARCHAR},
+      </if>
+      <if test="sendfrequence != null" >
+        SendFrequence = #{sendfrequence,jdbcType=VARCHAR},
+      </if>
+      <if test="senddr != null" >
+        SendDr = #{senddr,jdbcType=VARCHAR},
+      </if>
+      <if test="adr != null" >
+        Adr = #{adr,jdbcType=VARCHAR},
+      </if>
+      <if test="fcnt != null" >
+        Fcnt = #{fcnt,jdbcType=VARCHAR},
+      </if>
+      <if test="fport != null" >
+        Fport = #{fport,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        Data = #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="objectbattery != null" >
+        ObjectBattery = #{objectbattery,jdbcType=VARCHAR},
+      </if>
+      <if test="objecttype != null" >
+        ObjectType = #{objecttype,jdbcType=VARCHAR},
+      </if>
+      <if test="objectvalue != null" >
+        ObjectValue = #{objectvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and ReceiveTime = #{receivetime,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zrdh.pojo.lorawanUser.HmOrigindata" >
+    update HM_OriginData
+    set ApplicationId = #{applicationid,jdbcType=VARCHAR},
+      ApplicationName = #{applicationname,jdbcType=VARCHAR},
+      DeviceName = #{devicename,jdbcType=VARCHAR},
+      DevEui = #{deveui,jdbcType=VARCHAR},
+      GatewayId = #{gatewayid,jdbcType=VARCHAR},
+      GatewayName = #{gatewayname,jdbcType=VARCHAR},
+      GatewayTime = #{gatewaytime,jdbcType=VARCHAR},
+      Rssi = #{rssi,jdbcType=VARCHAR},
+      LoraSnr = #{lorasnr,jdbcType=VARCHAR},
+      Latitude = #{latitude,jdbcType=VARCHAR},
+      Longitude = #{longitude,jdbcType=VARCHAR},
+      Altitude = #{altitude,jdbcType=VARCHAR},
+      SendFrequence = #{sendfrequence,jdbcType=VARCHAR},
+      SendDr = #{senddr,jdbcType=VARCHAR},
+      Adr = #{adr,jdbcType=VARCHAR},
+      Fcnt = #{fcnt,jdbcType=VARCHAR},
+      Fport = #{fport,jdbcType=VARCHAR},
+      Data = #{data,jdbcType=VARCHAR},
+      ObjectBattery = #{objectbattery,jdbcType=VARCHAR},
+      ObjectType = #{objecttype,jdbcType=VARCHAR},
+      ObjectValue = #{objectvalue,jdbcType=VARCHAR}
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and ReceiveTime = #{receivetime,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrdh.dao.lorawanUser.HmLongfaultdecodedataMapper" >
+  <resultMap id="BaseResultMap" type="com.zrdh.pojo.lorawanUser.HmLongfaultdecodedata" >
+    <id column="DataId" property="dataid" jdbcType="INTEGER" />
+    <id column="DecodeTime" property="decodetime" jdbcType="TIMESTAMP" />
+    <result column="DeviceName" property="devicename" jdbcType="VARCHAR" />
+    <result column="DevEui" property="deveui" jdbcType="VARCHAR" />
+    <result column="GatewayId" property="gatewayid" jdbcType="VARCHAR" />
+    <result column="GatewayName" property="gatewayname" jdbcType="VARCHAR" />
+    <result column="Voltage" property="voltage" jdbcType="VARCHAR" />
+    <result column="EquipmentType" property="equipmenttype" jdbcType="VARCHAR" />
+    <result column="MeterNo" property="meterno" jdbcType="VARCHAR" />
+    <result column="UserCode" property="usercode" jdbcType="VARCHAR" />
+    <result column="ErrorCode" property="errorcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DataId, DecodeTime, DeviceName, DevEui, GatewayId, GatewayName, Voltage, EquipmentType, 
+    MeterNo, UserCode, ErrorCode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zrdh.pojo.lorawanUser.HmLongfaultdecodedataKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from HM_LongFaultDecodeData
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and DecodeTime = #{decodetime,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zrdh.pojo.lorawanUser.HmLongfaultdecodedataKey" >
+    delete from HM_LongFaultDecodeData
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and DecodeTime = #{decodetime,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="com.zrdh.pojo.lorawanUser.HmLongfaultdecodedata" >
+    insert into HM_LongFaultDecodeData (DataId, DecodeTime, DeviceName, 
+      DevEui, GatewayId, GatewayName, 
+      Voltage, EquipmentType, MeterNo, 
+      UserCode, ErrorCode)
+    values (#{dataid,jdbcType=INTEGER}, #{decodetime,jdbcType=TIMESTAMP}, #{devicename,jdbcType=VARCHAR}, 
+      #{deveui,jdbcType=VARCHAR}, #{gatewayid,jdbcType=VARCHAR}, #{gatewayname,jdbcType=VARCHAR}, 
+      #{voltage,jdbcType=VARCHAR}, #{equipmenttype,jdbcType=VARCHAR}, #{meterno,jdbcType=VARCHAR}, 
+      #{usercode,jdbcType=VARCHAR}, #{errorcode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zrdh.pojo.lorawanUser.HmLongfaultdecodedata" >
+    insert into HM_LongFaultDecodeData
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dataid != null" >
+        DataId,
+      </if>
+      <if test="decodetime != null" >
+        DecodeTime,
+      </if>
+      <if test="devicename != null" >
+        DeviceName,
+      </if>
+      <if test="deveui != null" >
+        DevEui,
+      </if>
+      <if test="gatewayid != null" >
+        GatewayId,
+      </if>
+      <if test="gatewayname != null" >
+        GatewayName,
+      </if>
+      <if test="voltage != null" >
+        Voltage,
+      </if>
+      <if test="equipmenttype != null" >
+        EquipmentType,
+      </if>
+      <if test="meterno != null" >
+        MeterNo,
+      </if>
+      <if test="usercode != null" >
+        UserCode,
+      </if>
+      <if test="errorcode != null" >
+        ErrorCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dataid != null" >
+        #{dataid,jdbcType=INTEGER},
+      </if>
+      <if test="decodetime != null" >
+        #{decodetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devicename != null" >
+        #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="deveui != null" >
+        #{deveui,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayid != null" >
+        #{gatewayid,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayname != null" >
+        #{gatewayname,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null" >
+        #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmenttype != null" >
+        #{equipmenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="meterno != null" >
+        #{meterno,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null" >
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="errorcode != null" >
+        #{errorcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zrdh.pojo.lorawanUser.HmLongfaultdecodedata" >
+    update HM_LongFaultDecodeData
+    <set >
+      <if test="devicename != null" >
+        DeviceName = #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="deveui != null" >
+        DevEui = #{deveui,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayid != null" >
+        GatewayId = #{gatewayid,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayname != null" >
+        GatewayName = #{gatewayname,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null" >
+        Voltage = #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmenttype != null" >
+        EquipmentType = #{equipmenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="meterno != null" >
+        MeterNo = #{meterno,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null" >
+        UserCode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="errorcode != null" >
+        ErrorCode = #{errorcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and DecodeTime = #{decodetime,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zrdh.pojo.lorawanUser.HmLongfaultdecodedata" >
+    update HM_LongFaultDecodeData
+    set DeviceName = #{devicename,jdbcType=VARCHAR},
+      DevEui = #{deveui,jdbcType=VARCHAR},
+      GatewayId = #{gatewayid,jdbcType=VARCHAR},
+      GatewayName = #{gatewayname,jdbcType=VARCHAR},
+      Voltage = #{voltage,jdbcType=VARCHAR},
+      EquipmentType = #{equipmenttype,jdbcType=VARCHAR},
+      MeterNo = #{meterno,jdbcType=VARCHAR},
+      UserCode = #{usercode,jdbcType=VARCHAR},
+      ErrorCode = #{errorcode,jdbcType=VARCHAR}
+    where DataId = #{dataid,jdbcType=INTEGER}
+      and DecodeTime = #{decodetime,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

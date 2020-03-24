@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrdh.dao.lorawanUser.UmUserdataMapper" >
+  <resultMap id="BaseResultMap" type="com.zrdh.pojo.lorawanUser.UmUserdata" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="housecard" property="housecard" jdbcType="VARCHAR" />
+    <result column="companyId" property="companyid" jdbcType="VARCHAR" />
+    <result column="centerId" property="centerid" jdbcType="VARCHAR" />
+    <result column="commountyId" property="commountyid" jdbcType="VARCHAR" />
+    <result column="buildingId" property="buildingid" jdbcType="VARCHAR" />
+    <result column="unitId" property="unitid" jdbcType="VARCHAR" />
+    <result column="roomcard" property="roomcard" jdbcType="VARCHAR" />
+    <result column="meterNo" property="meterno" jdbcType="VARCHAR" />
+    <result column="switchNo" property="switchno" jdbcType="VARCHAR" />
+    <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="keyFlag" property="keyflag" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="createdAt" property="createdat" jdbcType="VARCHAR" />
+    <result column="createdBy" property="createdby" jdbcType="VARCHAR" />
+    <result column="userArea" property="userarea" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, housecard, companyId, centerId, commountyId, buildingId, unitId, roomcard, meterNo, 
+    switchNo, owner, keyFlag, phone, createdAt, createdBy, userArea, address, note
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from UM_UserData
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from UM_UserData
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zrdh.pojo.lorawanUser.UmUserdata" >
+    insert into UM_UserData (id, housecard, companyId, 
+      centerId, commountyId, buildingId, 
+      unitId, roomcard, meterNo, 
+      switchNo, owner, keyFlag, 
+      phone, createdAt, createdBy, 
+      userArea, address, note
+      )
+    values (#{id,jdbcType=INTEGER}, #{housecard,jdbcType=VARCHAR}, #{companyid,jdbcType=VARCHAR}, 
+      #{centerid,jdbcType=VARCHAR}, #{commountyid,jdbcType=VARCHAR}, #{buildingid,jdbcType=VARCHAR}, 
+      #{unitid,jdbcType=VARCHAR}, #{roomcard,jdbcType=VARCHAR}, #{meterno,jdbcType=VARCHAR}, 
+      #{switchno,jdbcType=VARCHAR}, #{owner,jdbcType=VARCHAR}, #{keyflag,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{createdat,jdbcType=VARCHAR}, #{createdby,jdbcType=VARCHAR}, 
+      #{userarea,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zrdh.pojo.lorawanUser.UmUserdata" >
+    insert into UM_UserData
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="housecard != null" >
+        housecard,
+      </if>
+      <if test="companyid != null" >
+        companyId,
+      </if>
+      <if test="centerid != null" >
+        centerId,
+      </if>
+      <if test="commountyid != null" >
+        commountyId,
+      </if>
+      <if test="buildingid != null" >
+        buildingId,
+      </if>
+      <if test="unitid != null" >
+        unitId,
+      </if>
+      <if test="roomcard != null" >
+        roomcard,
+      </if>
+      <if test="meterno != null" >
+        meterNo,
+      </if>
+      <if test="switchno != null" >
+        switchNo,
+      </if>
+      <if test="owner != null" >
+        owner,
+      </if>
+      <if test="keyflag != null" >
+        keyFlag,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="createdat != null" >
+        createdAt,
+      </if>
+      <if test="createdby != null" >
+        createdBy,
+      </if>
+      <if test="userarea != null" >
+        userArea,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="housecard != null" >
+        #{housecard,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="centerid != null" >
+        #{centerid,jdbcType=VARCHAR},
+      </if>
+      <if test="commountyid != null" >
+        #{commountyid,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingid != null" >
+        #{buildingid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null" >
+        #{unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="roomcard != null" >
+        #{roomcard,jdbcType=VARCHAR},
+      </if>
+      <if test="meterno != null" >
+        #{meterno,jdbcType=VARCHAR},
+      </if>
+      <if test="switchno != null" >
+        #{switchno,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="keyflag != null" >
+        #{keyflag,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdat != null" >
+        #{createdat,jdbcType=VARCHAR},
+      </if>
+      <if test="createdby != null" >
+        #{createdby,jdbcType=VARCHAR},
+      </if>
+      <if test="userarea != null" >
+        #{userarea,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zrdh.pojo.lorawanUser.UmUserdata" >
+    update UM_UserData
+    <set >
+      <if test="housecard != null" >
+        housecard = #{housecard,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        companyId = #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="centerid != null" >
+        centerId = #{centerid,jdbcType=VARCHAR},
+      </if>
+      <if test="commountyid != null" >
+        commountyId = #{commountyid,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingid != null" >
+        buildingId = #{buildingid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null" >
+        unitId = #{unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="roomcard != null" >
+        roomcard = #{roomcard,jdbcType=VARCHAR},
+      </if>
+      <if test="meterno != null" >
+        meterNo = #{meterno,jdbcType=VARCHAR},
+      </if>
+      <if test="switchno != null" >
+        switchNo = #{switchno,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="keyflag != null" >
+        keyFlag = #{keyflag,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdat != null" >
+        createdAt = #{createdat,jdbcType=VARCHAR},
+      </if>
+      <if test="createdby != null" >
+        createdBy = #{createdby,jdbcType=VARCHAR},
+      </if>
+      <if test="userarea != null" >
+        userArea = #{userarea,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zrdh.pojo.lorawanUser.UmUserdata" >
+    update UM_UserData
+    set housecard = #{housecard,jdbcType=VARCHAR},
+      companyId = #{companyid,jdbcType=VARCHAR},
+      centerId = #{centerid,jdbcType=VARCHAR},
+      commountyId = #{commountyid,jdbcType=VARCHAR},
+      buildingId = #{buildingid,jdbcType=VARCHAR},
+      unitId = #{unitid,jdbcType=VARCHAR},
+      roomcard = #{roomcard,jdbcType=VARCHAR},
+      meterNo = #{meterno,jdbcType=VARCHAR},
+      switchNo = #{switchno,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR},
+      keyFlag = #{keyflag,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      createdAt = #{createdat,jdbcType=VARCHAR},
+      createdBy = #{createdby,jdbcType=VARCHAR},
+      userArea = #{userarea,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
