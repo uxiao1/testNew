@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!--注入多个触发器-->
+        <property name="triggers">
+            <list>
+                <ref bean="firstLeaveTrigger"></ref>
+                <ref bean="SecondLeaveTrigger"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="AnalysisJob" class="com.zrdh.job.AnalysisJob"></bean>
+
+    <!--  一级管网漏损  分钟级别自动分析  -->
+    <bean id="firstLeaveJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!--注入目标对象-->
+        <property name="targetObject" ref="AnalysisJob"></property>
+        <!--注入目标方法-->
+        <property name="targetMethod" value="firstLeaveLeakage"></property>
+    </bean>
+    <bean id="firstLeaveTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="firstLeaveJobDetail"></property>
+        <!--指定触发的时间,给予cron表达式-->
+        <property name="cronExpression">
+            <value>0/10 * * * * ?</value>
+<!--            <value>0 0/3 * * * ?</value>-->
+        </property>
+    </bean>
+
+    <!--  二级管网漏损  每天两次自动分析  -->
+    <bean id="SecondLeaveJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!--注入目标对象-->
+        <property name="targetObject" ref="AnalysisJob"></property>
+        <!--注入目标方法-->
+        <property name="targetMethod" value="secondLeaveLeakage"></property>
+    </bean>
+    <bean id="SecondLeaveTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="SecondLeaveJobDetail"></property>
+        <!--指定触发的时间,给予cron表达式-->
+        <property name="cronExpression">
+            <value>0/20 * * * * ? *</value>
+<!--            <value>0 0 0,12 * * ? *</value>-->
+        </property>
+    </bean>
+
+
+</beans>
