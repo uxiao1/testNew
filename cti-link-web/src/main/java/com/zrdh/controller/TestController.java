@@ -26,6 +26,6 @@ public class TestController {
 
     @GetMapping(value="/bbb",produces = "text/plain;charset=utf-8")
     public String testMethodN(){
-        return testService.findById(1);
+        return testService.getCurrentTemperature(null);
     }
 }
