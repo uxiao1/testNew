@@ -5,8 +5,11 @@ import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.zrdh.dao.lorawanUser.HmOrigindataMapper;
 import com.zrdh.dao.nbUser.TestNameMapper;
+import com.zrdh.dao.tradeSettlement.DevlasteststateMapper;
 import com.zrdh.pojo.lorawanUser.HmOrigindata;
 import com.zrdh.pojo.nbUser.TestName;
+import com.zrdh.pojo.tradeSettlement.Devlasteststate;
+import com.zrdh.pojo.tradeSettlement.DevlasteststateKey;
 import com.zrdh.service.TestService;
 import com.zrdh.utils.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +29,18 @@ public class TestServiceImpl implements TestService {
     private HmOrigindataMapper hmOrigindataMapper;
     @Autowired
     private TestNameMapper testNameMapper;
+    @Autowired
+    private DevlasteststateMapper devlasteststateMapper;
 
     @Override
     public String findById(Integer id) {
         HmOrigindata hmOrigindata = hmOrigindataMapper.selectByDataId(1);
-        TestName testName = testNameMapper.findById(1);
-        return hmOrigindata.getReceivetime() + "--------" + testName.getName();
+        HashMap<String,Object> testName = testNameMapper.findById("000054137");
+        DevlasteststateKey devlasteststateKey = new DevlasteststateKey();
+        devlasteststateKey.setDtuid("000");
+        devlasteststateKey.setDevname("000");
+        Devlasteststate devlasteststate = devlasteststateMapper.selectByPrimaryKey(devlasteststateKey);
+        return hmOrigindata.getReceivetime() + "--------" + testName.get("sfbm") + "---------" + devlasteststate;
     }
 
     /**
@@ -60,7 +69,7 @@ public class TestServiceImpl implements TestService {
                     Date uptime = dateFormat.parse(map.get("uptime"));
                     long abs = Math.abs(currentDate.getTime() - uptime.getTime());
                     HashMap<String, String> tempMap = new HashMap<>();
-                    tempMap.put("temperature",map.get("temperature"));
+                    tempMap.put("temp",map.get("temp"));
                     tempMap.put("diffTime",abs+"");
                     diffTime.add(tempMap);
                 } catch (ParseException e) {
@@ -75,7 +84,7 @@ public class TestServiceImpl implements TestService {
                     }
                 });
                 for (HashMap<String, String> map : diffTime) {
-                    return map.get("temperature");
+                    return map.get("temp");
                 }
             }
         }

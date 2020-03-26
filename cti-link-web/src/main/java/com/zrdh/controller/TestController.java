@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.ws.rs.Produces;
+
 /**
  * Description: cti-link-dataAnalysis
  *  测试
@@ -19,12 +21,13 @@ public class TestController {
     @Reference
     private TestService testService;
 
-    @GetMapping(value="/aaa/{id}",produces = "text/plain;charset=utf-8")
+    @GetMapping(value="/aaa/{id}")
     public String testMethod(@PathVariable("id")Integer id){
         return testService.findById(1);
+//        return "你好";
     }
 
-    @GetMapping(value="/bbb",produces = "text/plain;charset=utf-8")
+    @GetMapping(value="/bbb")
     public String testMethodN(){
         return testService.getCurrentTemperature(null);
     }

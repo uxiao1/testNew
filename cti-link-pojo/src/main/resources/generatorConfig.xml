@@ -11,25 +11,17 @@
             <!--是否取消注销  -->
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://jsrl.ctitech.net:13306/DB_Heatmeter?characterEncoding=utf-8" userId="miniapp" password="ctitech0722">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/cti-dms?characterEncoding=UTF-8" userId="root" password="root">
         </jdbcConnection>
         <!-- 所生成的实体类的位置默认资源包src -->
-        <javaModelGenerator targetPackage="com.zrdh.pojo" targetProject="src/main/java"></javaModelGenerator>
+        <javaModelGenerator targetPackage="com.zrdh.pojo.tradeSettlement" targetProject="src/main/java"></javaModelGenerator>
         <!--所生成的sqlMapper的映射文件位置，默认资源包src  -->
-        <sqlMapGenerator targetPackage="com.zrdh.dao.lorawanUser" targetProject="src/main/resources"></sqlMapGenerator>
+        <sqlMapGenerator targetPackage="com.zrdh.dao.tradeSettlement" targetProject="src/main/resources"></sqlMapGenerator>
         <!--配置到接口生成信息  -->
-        <javaClientGenerator targetPackage="com.zrdh.dao.lorawanUser" type="XMLMAPPER" targetProject="src/main/java"></javaClientGenerator>
+        <javaClientGenerator targetPackage="com.zrdh.dao.tradeSettlement" type="XMLMAPPER" targetProject="src/main/java"></javaClientGenerator>
 
         <!--为表生成代码tableName:表名,schema:不用填写  -->
-        <table tableName="UM_UserLevel" enableCountByExample="false" enableSelectByExample="false"
-               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="UM_UserData" enableCountByExample="false" enableSelectByExample="false"
-               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="HM_OriginData" enableCountByExample="false" enableSelectByExample="false"
-               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="HM_NormalDecodeData" enableCountByExample="false" enableSelectByExample="false"
-               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="HM_LongFaultDecodeData" enableCountByExample="false" enableSelectByExample="false"
+        <table tableName="devlasteststate" enableCountByExample="false" enableSelectByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>
