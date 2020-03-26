@@ -19,6 +19,14 @@
         <property name="driverClassName" value="${jdbc.driverClassName.dispatchCenter}" />
         <property name="url" value="${jdbc.url.dispatchCenter}" />
     </bean>
+<!--    调度中心中自系统历史数据-->
+    <bean id="dataSource-dispatchCenter-history"
+          class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="username" value="${jdbc.username.dispatchCenter}" />
+        <property name="password" value="${jdbc.password.dispatchCenter}" />
+        <property name="driverClassName" value="${jdbc.driverClassName.dispatchCenter}" />
+        <property name="url" value="${jdbc.url.dispatchCenter.history}" />
+    </bean>
 <!--    LoRa 户用表远程集抄系统-->
     <bean id="dataSource-lorawanUser"
           class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
@@ -50,6 +58,16 @@
         <property name="dataSource" ref="dataSource-dispatchCenter" />
         <property name="configLocation" value="classpath:SqlMapConfig.xml" />
         <property name="typeAliasesPackage" value="com.zrdh.pojo.dispatchCenter"></property>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:com/zrdh/dao/dispatchCenter/**/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="sqlSessionFactory-dispatchCenter-history" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource-dispatchCenter-history" />
+        <property name="configLocation" value="classpath:SqlMapConfig.xml" />
+        <property name="typeAliasesPackage" value="com.zrdh.pojo.dispatchCenterHistory"></property>
         <property name="mapperLocations">
             <list>
                 <value>classpath:com/zrdh/dao/dispatchCenter/**/*Mapper.xml</value>
@@ -91,6 +109,10 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.zrdh.dao.dispatchCenter"></property>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory-dispatchCenter"></property>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.zrdh.dao.dispatchCenterHistory"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory-dispatchCenter-history"></property>
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.zrdh.dao.nbUser"></property>

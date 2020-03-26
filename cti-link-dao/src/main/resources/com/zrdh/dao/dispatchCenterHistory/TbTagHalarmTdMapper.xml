@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrdh.dao.dispatchCenterHistory.TbTagHalarmTdMapper" >
+  <resultMap id="BaseResultMap" type="com.zrdh.pojo.dispatchCenterHistory.TbTagHalarmTd" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="TagName" property="tagname" jdbcType="VARCHAR" />
+    <result column="TagComment" property="tagcomment" jdbcType="VARCHAR" />
+    <result column="TagType" property="tagtype" jdbcType="TINYINT" />
+    <result column="ChlGroup" property="chlgroup" jdbcType="VARCHAR" />
+    <result column="ChlName" property="chlname" jdbcType="VARCHAR" />
+    <result column="DBTime" property="dbtime" jdbcType="TIMESTAMP" />
+    <result column="Value" property="value" jdbcType="DOUBLE" />
+    <result column="AlarmLimitValue" property="alarmlimitvalue" jdbcType="DOUBLE" />
+    <result column="AlarmGroup" property="alarmgroup" jdbcType="TINYINT" />
+    <result column="AlarmPri" property="alarmpri" jdbcType="TINYINT" />
+    <result column="AlarmMsg" property="alarmmsg" jdbcType="VARCHAR" />
+    <result column="AlarmType" property="alarmtype" jdbcType="VARCHAR" />
+    <result column="AlarmStatus" property="alarmstatus" jdbcType="TINYINT" />
+    <result column="AckStatus" property="ackstatus" jdbcType="TINYINT" />
+    <result column="AckPerson" property="ackperson" jdbcType="VARCHAR" />
+    <result column="AckTime" property="acktime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, TagName, TagComment, TagType, ChlGroup, ChlName, DBTime, Value, AlarmLimitValue, 
+    AlarmGroup, AlarmPri, AlarmMsg, AlarmType, AlarmStatus, AckStatus, AckPerson, AckTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_tag_halarm_td
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_tag_halarm_td
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zrdh.pojo.dispatchCenterHistory.TbTagHalarmTd" >
+    insert into tb_tag_halarm_td (Id, TagName, TagComment, 
+      TagType, ChlGroup, ChlName, 
+      DBTime, Value, AlarmLimitValue, 
+      AlarmGroup, AlarmPri, AlarmMsg, 
+      AlarmType, AlarmStatus, AckStatus, 
+      AckPerson, AckTime)
+    values (#{id,jdbcType=BIGINT}, #{tagname,jdbcType=VARCHAR}, #{tagcomment,jdbcType=VARCHAR}, 
+      #{tagtype,jdbcType=TINYINT}, #{chlgroup,jdbcType=VARCHAR}, #{chlname,jdbcType=VARCHAR}, 
+      #{dbtime,jdbcType=TIMESTAMP}, #{value,jdbcType=DOUBLE}, #{alarmlimitvalue,jdbcType=DOUBLE}, 
+      #{alarmgroup,jdbcType=TINYINT}, #{alarmpri,jdbcType=TINYINT}, #{alarmmsg,jdbcType=VARCHAR}, 
+      #{alarmtype,jdbcType=VARCHAR}, #{alarmstatus,jdbcType=TINYINT}, #{ackstatus,jdbcType=TINYINT}, 
+      #{ackperson,jdbcType=VARCHAR}, #{acktime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zrdh.pojo.dispatchCenterHistory.TbTagHalarmTd" >
+    insert into tb_tag_halarm_td
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="tagname != null" >
+        TagName,
+      </if>
+      <if test="tagcomment != null" >
+        TagComment,
+      </if>
+      <if test="tagtype != null" >
+        TagType,
+      </if>
+      <if test="chlgroup != null" >
+        ChlGroup,
+      </if>
+      <if test="chlname != null" >
+        ChlName,
+      </if>
+      <if test="dbtime != null" >
+        DBTime,
+      </if>
+      <if test="value != null" >
+        Value,
+      </if>
+      <if test="alarmlimitvalue != null" >
+        AlarmLimitValue,
+      </if>
+      <if test="alarmgroup != null" >
+        AlarmGroup,
+      </if>
+      <if test="alarmpri != null" >
+        AlarmPri,
+      </if>
+      <if test="alarmmsg != null" >
+        AlarmMsg,
+      </if>
+      <if test="alarmtype != null" >
+        AlarmType,
+      </if>
+      <if test="alarmstatus != null" >
+        AlarmStatus,
+      </if>
+      <if test="ackstatus != null" >
+        AckStatus,
+      </if>
+      <if test="ackperson != null" >
+        AckPerson,
+      </if>
+      <if test="acktime != null" >
+        AckTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tagname != null" >
+        #{tagname,jdbcType=VARCHAR},
+      </if>
+      <if test="tagcomment != null" >
+        #{tagcomment,jdbcType=VARCHAR},
+      </if>
+      <if test="tagtype != null" >
+        #{tagtype,jdbcType=TINYINT},
+      </if>
+      <if test="chlgroup != null" >
+        #{chlgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="chlname != null" >
+        #{chlname,jdbcType=VARCHAR},
+      </if>
+      <if test="dbtime != null" >
+        #{dbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=DOUBLE},
+      </if>
+      <if test="alarmlimitvalue != null" >
+        #{alarmlimitvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="alarmgroup != null" >
+        #{alarmgroup,jdbcType=TINYINT},
+      </if>
+      <if test="alarmpri != null" >
+        #{alarmpri,jdbcType=TINYINT},
+      </if>
+      <if test="alarmmsg != null" >
+        #{alarmmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmtype != null" >
+        #{alarmtype,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmstatus != null" >
+        #{alarmstatus,jdbcType=TINYINT},
+      </if>
+      <if test="ackstatus != null" >
+        #{ackstatus,jdbcType=TINYINT},
+      </if>
+      <if test="ackperson != null" >
+        #{ackperson,jdbcType=VARCHAR},
+      </if>
+      <if test="acktime != null" >
+        #{acktime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zrdh.pojo.dispatchCenterHistory.TbTagHalarmTd" >
+    update tb_tag_halarm_td
+    <set >
+      <if test="tagname != null" >
+        TagName = #{tagname,jdbcType=VARCHAR},
+      </if>
+      <if test="tagcomment != null" >
+        TagComment = #{tagcomment,jdbcType=VARCHAR},
+      </if>
+      <if test="tagtype != null" >
+        TagType = #{tagtype,jdbcType=TINYINT},
+      </if>
+      <if test="chlgroup != null" >
+        ChlGroup = #{chlgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="chlname != null" >
+        ChlName = #{chlname,jdbcType=VARCHAR},
+      </if>
+      <if test="dbtime != null" >
+        DBTime = #{dbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="value != null" >
+        Value = #{value,jdbcType=DOUBLE},
+      </if>
+      <if test="alarmlimitvalue != null" >
+        AlarmLimitValue = #{alarmlimitvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="alarmgroup != null" >
+        AlarmGroup = #{alarmgroup,jdbcType=TINYINT},
+      </if>
+      <if test="alarmpri != null" >
+        AlarmPri = #{alarmpri,jdbcType=TINYINT},
+      </if>
+      <if test="alarmmsg != null" >
+        AlarmMsg = #{alarmmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmtype != null" >
+        AlarmType = #{alarmtype,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmstatus != null" >
+        AlarmStatus = #{alarmstatus,jdbcType=TINYINT},
+      </if>
+      <if test="ackstatus != null" >
+        AckStatus = #{ackstatus,jdbcType=TINYINT},
+      </if>
+      <if test="ackperson != null" >
+        AckPerson = #{ackperson,jdbcType=VARCHAR},
+      </if>
+      <if test="acktime != null" >
+        AckTime = #{acktime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zrdh.pojo.dispatchCenterHistory.TbTagHalarmTd" >
+    update tb_tag_halarm_td
+    set TagName = #{tagname,jdbcType=VARCHAR},
+      TagComment = #{tagcomment,jdbcType=VARCHAR},
+      TagType = #{tagtype,jdbcType=TINYINT},
+      ChlGroup = #{chlgroup,jdbcType=VARCHAR},
+      ChlName = #{chlname,jdbcType=VARCHAR},
+      DBTime = #{dbtime,jdbcType=TIMESTAMP},
+      Value = #{value,jdbcType=DOUBLE},
+      AlarmLimitValue = #{alarmlimitvalue,jdbcType=DOUBLE},
+      AlarmGroup = #{alarmgroup,jdbcType=TINYINT},
+      AlarmPri = #{alarmpri,jdbcType=TINYINT},
+      AlarmMsg = #{alarmmsg,jdbcType=VARCHAR},
+      AlarmType = #{alarmtype,jdbcType=VARCHAR},
+      AlarmStatus = #{alarmstatus,jdbcType=TINYINT},
+      AckStatus = #{ackstatus,jdbcType=TINYINT},
+      AckPerson = #{ackperson,jdbcType=VARCHAR},
+      AckTime = #{acktime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -19,6 +19,21 @@ public class HmLongfaultdecodedata extends HmLongfaultdecodedataKey {
 
     private String errorcode;
 
+    @Override
+    public String toString() {
+        return "HmLongfaultdecodedata{" +
+                "devicename='" + devicename + '\'' +
+                ", deveui='" + deveui + '\'' +
+                ", gatewayid='" + gatewayid + '\'' +
+                ", gatewayname='" + gatewayname + '\'' +
+                ", voltage='" + voltage + '\'' +
+                ", equipmenttype='" + equipmenttype + '\'' +
+                ", meterno='" + meterno + '\'' +
+                ", usercode='" + usercode + '\'' +
+                ", errorcode='" + errorcode + '\'' +
+                '}';
+    }
+
     public String getDevicename() {
         return devicename;
     }

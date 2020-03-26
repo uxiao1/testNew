@@ -1,6 +1,5 @@
 package com.zrdh.dao.nbUser;
 
-import com.zrdh.pojo.nbUser.TestName;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

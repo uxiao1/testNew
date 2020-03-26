@@ -43,6 +43,33 @@ public class HmOrigindata extends HmOrigindataKey {
 
     private String objectvalue;
 
+    @Override
+    public String toString() {
+        return "HmOrigindata{" +
+                "applicationid='" + applicationid + '\'' +
+                ", applicationname='" + applicationname + '\'' +
+                ", devicename='" + devicename + '\'' +
+                ", deveui='" + deveui + '\'' +
+                ", gatewayid='" + gatewayid + '\'' +
+                ", gatewayname='" + gatewayname + '\'' +
+                ", gatewaytime='" + gatewaytime + '\'' +
+                ", rssi='" + rssi + '\'' +
+                ", lorasnr='" + lorasnr + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", altitude='" + altitude + '\'' +
+                ", sendfrequence='" + sendfrequence + '\'' +
+                ", senddr='" + senddr + '\'' +
+                ", adr='" + adr + '\'' +
+                ", fcnt='" + fcnt + '\'' +
+                ", fport='" + fport + '\'' +
+                ", data='" + data + '\'' +
+                ", objectbattery='" + objectbattery + '\'' +
+                ", objecttype='" + objecttype + '\'' +
+                ", objectvalue='" + objectvalue + '\'' +
+                '}';
+    }
+
     public String getApplicationid() {
         return applicationid;
     }

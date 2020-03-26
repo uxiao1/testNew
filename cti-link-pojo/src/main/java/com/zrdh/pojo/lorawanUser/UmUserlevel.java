@@ -25,6 +25,24 @@ public class UmUserlevel {
 
     private String createdby;
 
+    @Override
+    public String toString() {
+        return "UmUserlevel{" +
+                "id=" + id +
+                ", pid=" + pid +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", level=" + level +
+                ", order=" + order +
+                ", attr1='" + attr1 + '\'' +
+                ", attr2='" + attr2 + '\'' +
+                ", attr3='" + attr3 + '\'' +
+                ", attr4='" + attr4 + '\'' +
+                ", createdat='" + createdat + '\'' +
+                ", createdby='" + createdby + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

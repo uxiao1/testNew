@@ -45,6 +45,34 @@ public class HmNormaldecodedata extends HmNormaldecodedataKey {
 
     private String unit;
 
+    @Override
+    public String toString() {
+        return "HmNormaldecodedata{" +
+                "devicename='" + devicename + '\'' +
+                ", deveui='" + deveui + '\'' +
+                ", gatewayid='" + gatewayid + '\'' +
+                ", gatewayname='" + gatewayname + '\'' +
+                ", voltage='" + voltage + '\'' +
+                ", equipmenttype='" + equipmenttype + '\'' +
+                ", meterno='" + meterno + '\'' +
+                ", usercode='" + usercode + '\'' +
+                ", currentcoldnumber=" + currentcoldnumber +
+                ", currentheatnumber=" + currentheatnumber +
+                ", origincurrentheatnumber=" + origincurrentheatnumber +
+                ", heatpower=" + heatpower +
+                ", flowrate=" + flowrate +
+                ", totalflow=" + totalflow +
+                ", supplywatertemperature=" + supplywatertemperature +
+                ", returnwatertemperature=" + returnwatertemperature +
+                ", currenttime='" + currenttime + '\'' +
+                ", wdc=" + wdc +
+                ", status1='" + status1 + '\'' +
+                ", status2='" + status2 + '\'' +
+                ", regflag='" + regflag + '\'' +
+                ", unit='" + unit + '\'' +
+                '}';
+    }
+
     public String getDevicename() {
         return devicename;
     }

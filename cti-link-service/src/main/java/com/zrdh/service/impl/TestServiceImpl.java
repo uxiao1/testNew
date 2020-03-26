@@ -3,9 +3,13 @@ package com.zrdh.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
+import com.zrdh.dao.dispatchCenter.TagsMapper;
+import com.zrdh.dao.dispatchCenterHistory.TbTagHdbTdMapper;
 import com.zrdh.dao.lorawanUser.HmOrigindataMapper;
 import com.zrdh.dao.nbUser.TestNameMapper;
 import com.zrdh.dao.tradeSettlement.DevlasteststateMapper;
+import com.zrdh.pojo.dispatchCenter.Tags;
+import com.zrdh.pojo.dispatchCenterHistory.TbTagHdbTd;
 import com.zrdh.pojo.lorawanUser.HmOrigindata;
 import com.zrdh.pojo.tradeSettlement.Devlasteststate;
 import com.zrdh.pojo.tradeSettlement.DevlasteststateKey;
@@ -30,6 +34,10 @@ public class TestServiceImpl implements TestService {
     private TestNameMapper testNameMapper;
     @Autowired
     private DevlasteststateMapper devlasteststateMapper;
+    @Autowired
+    private TagsMapper tagsMapper;
+    @Autowired
+    private TbTagHdbTdMapper tbTagHdbTdMapper;
 
     @Override
     public String findById(Integer id) {
@@ -39,7 +47,9 @@ public class TestServiceImpl implements TestService {
         devlasteststateKey.setDtuid("000");
         devlasteststateKey.setDevname("000");
         Devlasteststate devlasteststate = devlasteststateMapper.selectByPrimaryKey(devlasteststateKey);
-        return hmOrigindata.getReceivetime() + "--------" + testName.get("sfbm") + "---------" + devlasteststate.getDevname();
+        Tags tags = tagsMapper.findByTagName("JDLDG_FA_KP");
+        TbTagHdbTd tbTagHdbTd = tbTagHdbTdMapper.selectByPrimaryKey(379757236);
+        return hmOrigindata.getReceivetime() + "--------" + testName.get("sfbm") + "---------" + devlasteststate.getDevname() + "---------" + tags + "----------" + tbTagHdbTd;
     }
 
     /**

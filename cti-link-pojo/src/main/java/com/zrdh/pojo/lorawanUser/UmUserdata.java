@@ -37,6 +37,30 @@ public class UmUserdata {
 
     private String note;
 
+    @Override
+    public String toString() {
+        return "UmUserdata{" +
+                "id=" + id +
+                ", housecard='" + housecard + '\'' +
+                ", companyid='" + companyid + '\'' +
+                ", centerid='" + centerid + '\'' +
+                ", commountyid='" + commountyid + '\'' +
+                ", buildingid='" + buildingid + '\'' +
+                ", unitid='" + unitid + '\'' +
+                ", roomcard='" + roomcard + '\'' +
+                ", meterno='" + meterno + '\'' +
+                ", switchno='" + switchno + '\'' +
+                ", owner='" + owner + '\'' +
+                ", keyflag='" + keyflag + '\'' +
+                ", phone='" + phone + '\'' +
+                ", createdat='" + createdat + '\'' +
+                ", createdby='" + createdby + '\'' +
+                ", userarea='" + userarea + '\'' +
+                ", address='" + address + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

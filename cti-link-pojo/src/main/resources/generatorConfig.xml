@@ -11,17 +11,19 @@
             <!--是否取消注销  -->
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/cti-dms?characterEncoding=UTF-8" userId="root" password="root">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://117.158.106.150:6744/kfjsrl_history?characterEncoding=UTF-8" userId="kfreader" password="kfreader@123">
         </jdbcConnection>
         <!-- 所生成的实体类的位置默认资源包src -->
-        <javaModelGenerator targetPackage="com.zrdh.pojo.tradeSettlement" targetProject="src/main/java"></javaModelGenerator>
+        <javaModelGenerator targetPackage="com.zrdh.pojo.dispatchCenterHistory" targetProject="src/main/java"></javaModelGenerator>
         <!--所生成的sqlMapper的映射文件位置，默认资源包src  -->
-        <sqlMapGenerator targetPackage="com.zrdh.dao.tradeSettlement" targetProject="src/main/resources"></sqlMapGenerator>
+        <sqlMapGenerator targetPackage="com.zrdh.dao.dispatchCenterHistory" targetProject="src/main/resources"></sqlMapGenerator>
         <!--配置到接口生成信息  -->
-        <javaClientGenerator targetPackage="com.zrdh.dao.tradeSettlement" type="XMLMAPPER" targetProject="src/main/java"></javaClientGenerator>
+        <javaClientGenerator targetPackage="com.zrdh.dao.dispatchCenterHistory" type="XMLMAPPER" targetProject="src/main/java"></javaClientGenerator>
 
         <!--为表生成代码tableName:表名,schema:不用填写  -->
-        <table tableName="devlasteststate" enableCountByExample="false" enableSelectByExample="false"
+        <table tableName="tb_tag_halarm_td" enableCountByExample="false" enableSelectByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="tb_tag_hdb_td" enableCountByExample="false" enableSelectByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrdh.dao.dispatchCenterHistory.TbTagHdbTdMapper" >
+  <resultMap id="BaseResultMap" type="com.zrdh.pojo.dispatchCenterHistory.TbTagHdbTd" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="TagId" property="tagid" jdbcType="INTEGER" />
+    <result column="DBTime" property="dbtime" jdbcType="TIMESTAMP" />
+    <result column="Value" property="value" jdbcType="DOUBLE" />
+    <result column="Qos" property="qos" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, TagId, DBTime, Value, Qos
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_tag_hdb_td
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_tag_hdb_td
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zrdh.pojo.dispatchCenterHistory.TbTagHdbTd" >
+    insert into tb_tag_hdb_td (Id, TagId, DBTime, 
+      Value, Qos)
+    values (#{id,jdbcType=INTEGER}, #{tagid,jdbcType=INTEGER}, #{dbtime,jdbcType=TIMESTAMP}, 
+      #{value,jdbcType=DOUBLE}, #{qos,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zrdh.pojo.dispatchCenterHistory.TbTagHdbTd" >
+    insert into tb_tag_hdb_td
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="tagid != null" >
+        TagId,
+      </if>
+      <if test="dbtime != null" >
+        DBTime,
+      </if>
+      <if test="value != null" >
+        Value,
+      </if>
+      <if test="qos != null" >
+        Qos,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tagid != null" >
+        #{tagid,jdbcType=INTEGER},
+      </if>
+      <if test="dbtime != null" >
+        #{dbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=DOUBLE},
+      </if>
+      <if test="qos != null" >
+        #{qos,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zrdh.pojo.dispatchCenterHistory.TbTagHdbTd" >
+    update tb_tag_hdb_td
+    <set >
+      <if test="tagid != null" >
+        TagId = #{tagid,jdbcType=INTEGER},
+      </if>
+      <if test="dbtime != null" >
+        DBTime = #{dbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="value != null" >
+        Value = #{value,jdbcType=DOUBLE},
+      </if>
+      <if test="qos != null" >
+        Qos = #{qos,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zrdh.pojo.dispatchCenterHistory.TbTagHdbTd" >
+    update tb_tag_hdb_td
+    set TagId = #{tagid,jdbcType=INTEGER},
+      DBTime = #{dbtime,jdbcType=TIMESTAMP},
+      Value = #{value,jdbcType=DOUBLE},
+      Qos = #{qos,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
