@@ -7,7 +7,6 @@ import com.zrdh.dao.lorawanUser.HmOrigindataMapper;
 import com.zrdh.dao.nbUser.TestNameMapper;
 import com.zrdh.dao.tradeSettlement.DevlasteststateMapper;
 import com.zrdh.pojo.lorawanUser.HmOrigindata;
-import com.zrdh.pojo.nbUser.TestName;
 import com.zrdh.pojo.tradeSettlement.Devlasteststate;
 import com.zrdh.pojo.tradeSettlement.DevlasteststateKey;
 import com.zrdh.service.TestService;
@@ -40,7 +39,7 @@ public class TestServiceImpl implements TestService {
         devlasteststateKey.setDtuid("000");
         devlasteststateKey.setDevname("000");
         Devlasteststate devlasteststate = devlasteststateMapper.selectByPrimaryKey(devlasteststateKey);
-        return hmOrigindata.getReceivetime() + "--------" + testName.get("sfbm") + "---------" + devlasteststate;
+        return hmOrigindata.getReceivetime() + "--------" + testName.get("sfbm") + "---------" + devlasteststate.getDevname();
     }
 
     /**
