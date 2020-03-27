@@ -31,7 +31,7 @@ public class TestSome {
 
     @Test
     public void testTwo(){
-        testService.findById(1);
+        System.out.println("-----------------------------------"+testService.findById(1)+"------------------------------------");
     }
 
 }
