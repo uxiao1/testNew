@@ -1,9 +1,9 @@
 package com.zrdh.pojo.tradeSettlement;
 
 public class DevlasteststateKey {
-    private String dtuid;
+    private String dtuid;           //仪表号meterNo
 
-    private String devname;
+    private String devname;         //设备名称
 
     public String getDtuid() {
         return dtuid;
