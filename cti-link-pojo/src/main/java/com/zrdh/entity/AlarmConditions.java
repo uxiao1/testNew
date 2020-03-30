@@ -17,8 +17,8 @@ public class AlarmConditions implements Serializable {
     private Float ltHeatPower;      //小于功率
     private Float gtTotalFlow;      //超过总流量
     private Float ltTotalFlow;      //小于总流量
-    private Float gtVoltage;        //超过电压
-    private Float ltVoltage;        //小于电压
+    private Float gtFlowrate;       //超过水流速
+    private Float ltFlowrate;       //小于水流速
 
     public Float getGtHeatNumber() {
         return gtHeatNumber;
@@ -84,19 +84,19 @@ public class AlarmConditions implements Serializable {
         this.ltTotalFlow = ltTotalFlow;
     }
 
-    public Float getGtVoltage() {
-        return gtVoltage;
+    public Float getGtFlowrate() {
+        return gtFlowrate;
     }
 
-    public void setGtVoltage(Float gtVoltage) {
-        this.gtVoltage = gtVoltage;
+    public void setGtFlowrate(Float gtFlowrate) {
+        this.gtFlowrate = gtFlowrate;
     }
 
-    public Float getLtVoltage() {
-        return ltVoltage;
+    public Float getLtFlowrate() {
+        return ltFlowrate;
     }
 
-    public void setLtVoltage(Float ltVoltage) {
-        this.ltVoltage = ltVoltage;
+    public void setLtFlowrate(Float ltFlowrate) {
+        this.ltFlowrate = ltFlowrate;
     }
 }

@@ -6,11 +6,12 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.zrdh.dao.dispatchCenter.TagsMapper;
 import com.zrdh.dao.dispatchCenterHistory.TbTagHdbTdMapper;
 import com.zrdh.dao.lorawanUser.HmOrigindataMapper;
-import com.zrdh.dao.nbUser.TestNameMapper;
+import com.zrdh.dao.nbUser.VmAmeterRlgsMapper;
 import com.zrdh.dao.tradeSettlement.DevlasteststateMapper;
 import com.zrdh.pojo.dispatchCenter.Tags;
 import com.zrdh.pojo.dispatchCenterHistory.TbTagHdbTd;
 import com.zrdh.pojo.lorawanUser.HmOrigindata;
+import com.zrdh.pojo.nbUser.VmAmeterRlgs;
 import com.zrdh.pojo.tradeSettlement.Devlasteststate;
 import com.zrdh.pojo.tradeSettlement.DevlasteststateKey;
 import com.zrdh.service.TestService;
@@ -31,25 +32,25 @@ public class TestServiceImpl implements TestService {
     @Autowired
     private HmOrigindataMapper hmOrigindataMapper;
     @Autowired
-    private TestNameMapper testNameMapper;
-    @Autowired
     private DevlasteststateMapper devlasteststateMapper;
     @Autowired
     private TagsMapper tagsMapper;
     @Autowired
     private TbTagHdbTdMapper tbTagHdbTdMapper;
+    @Autowired
+    private VmAmeterRlgsMapper vmAmeterRlgsMapper;
 
     @Override
     public String findById(Integer id) {
         HmOrigindata hmOrigindata = hmOrigindataMapper.selectByDataId(1);
-        HashMap<String,Object> testName = testNameMapper.findById("000054137");
+//        HashMap<String,Object> testName = testNameMapper.findById("000054137");
         DevlasteststateKey devlasteststateKey = new DevlasteststateKey();
         devlasteststateKey.setDtuid("000");
         devlasteststateKey.setDevname("000");
         Devlasteststate devlasteststate = devlasteststateMapper.selectByPrimaryKey(devlasteststateKey);
         Tags tags = tagsMapper.findByTagName("JDLDG_FA_KP");
         TbTagHdbTd tbTagHdbTd = tbTagHdbTdMapper.selectByPrimaryKey(379757236);
-        return hmOrigindata.getReceivetime() + "--------" + testName.get("sfbm") + "---------" + devlasteststate.getDevname() + "---------" + tags + "----------" + tbTagHdbTd;
+        return hmOrigindata.getReceivetime() + "--------"  + "---------" + devlasteststate.getDevname() + "---------" + tags + "----------" + tbTagHdbTd;
     }
 
     /**
@@ -98,5 +99,10 @@ public class TestServiceImpl implements TestService {
             }
         }
         return temperature;
+    }
+
+    @Override
+    public VmAmeterRlgs selectByMeterNo(String meterNo) {
+        return vmAmeterRlgsMapper.selectByMeterNo(meterNo);
     }
 }

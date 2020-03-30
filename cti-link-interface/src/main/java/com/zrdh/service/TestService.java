@@ -1,6 +1,8 @@
 package com.zrdh.service;
 
 
+import com.zrdh.pojo.nbUser.VmAmeterRlgs;
+
 import java.util.Date;
 
 /**
@@ -13,4 +15,5 @@ public interface TestService {
 
     String getCurrentTemperature(Date date);
 
+    VmAmeterRlgs selectByMeterNo(String meterNo);
 }

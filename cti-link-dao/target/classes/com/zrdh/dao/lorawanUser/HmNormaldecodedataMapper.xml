@@ -33,6 +33,16 @@
     HeatPower, FlowRate, TotalFlow, SupplyWaterTemperature, ReturnWaterTemperature, CurrentTime, 
     Wdc, Status1, Status2, RegFlag, Unit
   </sql>
+  <sql id="newest_data">
+    SELECT
+	    *
+    FROM
+      HM_NormalDecodeData hm,
+      ( SELECT MeterNo, MAX( CurrentTime ) AS CurrentTime FROM HM_NormalDecodeData GROUP BY MeterNo ) maxTime
+    WHERE
+	    hm.CurrentTime = maxTime.CurrentTime
+	AND hm.MeterNo = maxTime.MeterNo
+  </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zrdh.pojo.lorawanUser.HmNormaldecodedataKey" >
     select 
     <include refid="Base_Column_List" />
@@ -316,4 +326,48 @@
     where DataId = #{dataid,jdbcType=INTEGER}
       and DecodeTime = #{decodetime,jdbcType=TIMESTAMP}
   </update>
+
+  <select id="selectByAlarmConditions" parameterType="com.zrdh.entity.AlarmConditions" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+    (   <include refid="newest_data"/>    )
+    where
+    <if test="gtHeatNumber != null">
+      CurrentHeatNumber &gt; #{gtHeatNumber}
+    </if>
+    <if test="ltHeatNumber != null">
+      CurrentHeatNumber &lt; #{ltHeatNumber}
+    </if>
+    <if test="gtWdc != null">
+      Wdc &gt; #{gtWdc}
+    </if>
+    <if test="ltWdc != null">
+      Wdc &lt; #{ltWdc}
+    </if>
+    <if test="gtHeatPower != null">
+      HeatPower &gt; #{gtHeatPower}
+    </if>
+    <if test="ltHeatPower != null">
+      HeatPower &lt; #{ltHeatPower}
+    </if>
+    <if test="gtTotalFlow != null">
+      TotalFlow &gt; #{gtTotalFlow}
+    </if>
+    <if test="ltTotalFlow != null">
+      TotalFlow &lt; #{ltTotalFlow}
+    </if>
+    <if test="gtVoltage != null">
+      Voltage &gt; #{gtVoltage}
+    </if>
+    <if test="ltVoltage != null">
+      Voltage &lt; #{ltVoltage}
+    </if>
+    <if test="gtFlowrate != null">
+      FlowRate &gt; #{gtFlowrate}
+    </if>
+    <if test="ltFlowrate != null">
+      FlowRate &lt; #{ltFlowrate}
+    </if>
+  </select>
 </mapper>

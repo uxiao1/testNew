@@ -17,4 +17,5 @@ public interface TbTagHdbTdMapper {
     int updateByPrimaryKeySelective(TbTagHdbTd record);
 
     int updateByPrimaryKey(TbTagHdbTd record);
+
 }

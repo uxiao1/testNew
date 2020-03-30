@@ -1,5 +1,7 @@
 package com.zrdh.entity;
 
+import java.util.Date;
+
 /**
  * Description: cti-link-dataAnalysis
  * 返回前端告警信息
@@ -7,9 +9,9 @@ package com.zrdh.entity;
  */
 public class AlarmInfo {
 
-    private String DeviceName;      //设备名称
-    private String voltage;         //电压
-    private String equipmenttype;   //设备类型
+//    private String DeviceName;      //设备名称
+//    private String voltage;         //电压
+//    private String equipmenttype;   //设备类型
     private String meterno;         //仪表号
     private Float currentheatnumber;//热力值
     private Float heatpower;        //功率
@@ -17,29 +19,22 @@ public class AlarmInfo {
     private Float supplywatertemperature;//进水温度
     private Float returnwatertemperature;//回水温度
     private Float wdc;              //水温差
+    private Float flowrate;         //瞬时流量
+    private Date currentTime;       //时间
 
-    public String getDeviceName() {
-        return DeviceName;
-    }
-
-    public void setDeviceName(String deviceName) {
-        DeviceName = deviceName;
-    }
-
-    public String getVoltage() {
-        return voltage;
-    }
-
-    public void setVoltage(String voltage) {
-        this.voltage = voltage;
-    }
-
-    public String getEquipmenttype() {
-        return equipmenttype;
-    }
-
-    public void setEquipmenttype(String equipmenttype) {
-        this.equipmenttype = equipmenttype;
+    @Override
+    public String toString() {
+        return "AlarmInfo{" +
+                "meterno='" + meterno + '\'' +
+                ", currentheatnumber=" + currentheatnumber +
+                ", heatpower=" + heatpower +
+                ", totalflow=" + totalflow +
+                ", supplywatertemperature=" + supplywatertemperature +
+                ", returnwatertemperature=" + returnwatertemperature +
+                ", wdc=" + wdc +
+                ", flowrate=" + flowrate +
+                ", currentTime=" + currentTime +
+                '}';
     }
 
     public String getMeterno() {
@@ -96,5 +91,21 @@ public class AlarmInfo {
 
     public void setWdc(Float wdc) {
         this.wdc = wdc;
+    }
+
+    public Float getFlowrate() {
+        return flowrate;
+    }
+
+    public void setFlowrate(Float flowrate) {
+        this.flowrate = flowrate;
+    }
+
+    public Date getCurrentTime() {
+        return currentTime;
+    }
+
+    public void setCurrentTime(Date currentTime) {
+        this.currentTime = currentTime;
     }
 }

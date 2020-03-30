@@ -139,4 +139,48 @@
     where DtuId = #{dtuid,jdbcType=VARCHAR}
       and DevName = #{devname,jdbcType=VARCHAR}
   </update>
+<!--  todo 等数据库表修改之后再改 pojo也要修改-->
+  <select id="selectByAlarmCoditions" parameterType="com.zrdh.entity.AlarmConditions" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+    devlasteststate
+    where
+    <if test="gtHeatNumber != null">
+      CurrentHeatNumber &gt; #{gtHeatNumber}
+    </if>
+    <if test="ltHeatNumber != null">
+      CurrentHeatNumber &lt; #{ltHeatNumber}
+    </if>
+    <if test="gtWdc != null">
+      Wdc &gt; #{gtWdc}
+    </if>
+    <if test="ltWdc != null">
+      Wdc &lt; #{ltWdc}
+    </if>
+    <if test="gtHeatPower != null">
+      HeatPower &gt; #{gtHeatPower}
+    </if>
+    <if test="ltHeatPower != null">
+      HeatPower &lt; #{ltHeatPower}
+    </if>
+    <if test="gtTotalFlow != null">
+      TotalFlow &gt; #{gtTotalFlow}
+    </if>
+    <if test="ltTotalFlow != null">
+      TotalFlow &lt; #{ltTotalFlow}
+    </if>
+    <if test="gtVoltage != null">
+      Voltage &gt; #{gtVoltage}
+    </if>
+    <if test="ltVoltage != null">
+      Voltage &lt; #{ltVoltage}
+    </if>
+    <if test="gtFlowrate != null">
+      FlowRate &gt; #{gtFlowrate}
+    </if>
+    <if test="ltFlowrate != null">
+      FlowRate &lt; #{ltFlowrate}
+    </if>
+  </select>
 </mapper>

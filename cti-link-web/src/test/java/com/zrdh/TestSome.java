@@ -1,13 +1,17 @@
 package com.zrdh;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.zrdh.entity.AlarmConditions;
+import com.zrdh.entity.AlarmInfo;
+import com.zrdh.pojo.nbUser.VmAmeterRlgs;
+import com.zrdh.service.DeviceInfoService;
 import com.zrdh.service.TestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Description: cti-link-dataAnalysis
@@ -19,13 +23,22 @@ public class TestSome {
 
     @Reference
     private TestService testService;
+    @Reference
+    private DeviceInfoService deviceInfoService;
 
     @Test
     public void testOne(){
-        ArrayList<Object> list = new ArrayList<>();
-        list.add("111");
-        list.add("222");
-        System.out.println(list.toString());
+        AlarmConditions alarmConditions = new AlarmConditions();
+        alarmConditions.setGtHeatNumber((float) 100);
+        alarmConditions.setLtHeatNumber((float) 500);
+        List<AlarmInfo> alarmInfoList = deviceInfoService.queryforAlarmInfo(alarmConditions);
+        System.out.println(alarmInfoList);
+    }
+
+    @Test
+    public void test(){
+        VmAmeterRlgs vmAmeterRlgs = testService.selectByMeterNo("81318075");
+        System.out.println(vmAmeterRlgs);
     }
 
 
@@ -34,4 +47,58 @@ public class TestSome {
         System.out.println("-----------------------------------"+testService.findById(1)+"------------------------------------");
     }
 
+    /**
+     * 随机生成10个字母,并按照从小到大的顺序排序
+     */
+    @Test
+    public void testThird(){
+        HashSet<Integer> hashSet = new HashSet<>();
+        Random random = new Random();
+        while (hashSet.size()<10){
+            int i = random.nextInt(26);
+            hashSet.add(i+97);
+        }
+        ArrayList<Integer> letter = new ArrayList<>();
+        for (Integer i : hashSet) {
+            letter.add(i);
+        }
+        Collections.sort(letter);
+        for (int i : letter) {
+            char c = (char) i;
+            System.out.println(c);
+        }
+    }
+
+    /**
+     * 求0-100的素数
+     */
+    @Test
+    public void testFour(){
+        int a,b ;
+        for (a = 1; a <= 100; a++) {
+            for (b = 2; b < a; b++) {
+                if(a%b == 0){
+                    break;
+                }
+            }
+            if(a == b){
+                System.out.println(a);
+            }
+        }
+    }
+
+
+
+    public boolean testFive(String s1, String s2){
+        char[] chars = s1.toCharArray();
+        Arrays.sort(chars);
+        char[] chars1 = s2.toCharArray();
+        Arrays.sort(chars1);
+        return new String(chars).equals(new String(chars1));
+    }
+
+    @Test
+    public void testSix(){
+        System.out.println(testFive("abcdrf","cdbafr"));
+    }
 }

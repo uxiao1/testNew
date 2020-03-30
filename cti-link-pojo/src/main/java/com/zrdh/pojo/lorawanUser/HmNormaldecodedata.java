@@ -25,9 +25,9 @@ public class HmNormaldecodedata extends HmNormaldecodedataKey {
 
     private Float heatpower;
 
-    private Float flowrate;
+    private Float flowrate;     //瞬时流量
 
-    private Float totalflow;
+    private Float totalflow;    //总流量
 
     private Float supplywatertemperature;
 

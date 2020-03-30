@@ -3,8 +3,20 @@ package com.zrdh.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
+import com.zrdh.dao.dispatchCenter.TagsMapper;
+import com.zrdh.dao.dispatchCenterHistory.TbTagHdbTdMapper;
+import com.zrdh.dao.lorawanUser.HmNormaldecodedataMapper;
+import com.zrdh.dao.nbUser.VmAmeterRlgsMapper;
+import com.zrdh.dao.tradeSettlement.DevlasteststateMapper;
+import com.zrdh.entity.AlarmConditions;
+import com.zrdh.entity.AlarmInfo;
+import com.zrdh.pojo.lorawanUser.HmNormaldecodedata;
+import com.zrdh.pojo.nbUser.VmAmeterRlgs;
+import com.zrdh.pojo.tradeSettlement.Devlasteststate;
 import com.zrdh.service.DeviceInfoService;
 import com.zrdh.utils.HttpClientUtil;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,6 +28,17 @@ import java.util.*;
  */
 @Service(interfaceClass = DeviceInfoService.class)
 public class DeviceInfoServiceImpl implements DeviceInfoService {
+
+    @Autowired
+    private TagsMapper tagsMapper;  //调度中心中自系统
+    @Autowired
+    private TbTagHdbTdMapper tbTagHdbTdMapper;
+    @Autowired
+    private HmNormaldecodedataMapper normaldecodedataMapper; //lorawan系统
+    @Autowired
+    private DevlasteststateMapper devlasteststateMapper; //贸易结算系统
+    @Autowired
+    private VmAmeterRlgsMapper vmAmeterRlgsMapper; //德尔系统(nb)
 
     @Override
     public String getCurrentTemperature(Date date) {
@@ -59,4 +82,42 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
         }
         return temperature;
     }
+
+    @Override
+    public Map<String,List<AlarmInfo>> queryforAlarmInfo(AlarmConditions alarmConditions) {
+        if(alarmConditions == null){
+            return null;
+        }
+        HashMap<String, List<AlarmInfo>> resultMap = new HashMap<>();
+        //---------------------------lorawan系统-----------------------------
+        List<HmNormaldecodedata> normaldecodedataList = normaldecodedataMapper.selectByAlarmConditions(alarmConditions);
+        List<AlarmInfo> lorawanList = new ArrayList<>();
+        BeanUtils.copyProperties(normaldecodedataList,lorawanList);
+        resultMap.put("loranwan",lorawanList);
+
+        //---------------------------贸易结算系统    TODO 字段名还未调整----------------------
+        List<Devlasteststate> devlasteststateList = devlasteststateMapper.selectByAlarmCoditions(alarmConditions);
+        //添加入集合
+
+        //----------------------------deer(nb)系统--------------------------------
+        List<VmAmeterRlgs> vmAmeterRlgsList = vmAmeterRlgsMapper.selectByAlarmConditions(alarmConditions);
+        List<AlarmInfo> deerList = new ArrayList<>();
+        for (VmAmeterRlgs vmAmeterRlgs : vmAmeterRlgsList) {
+            AlarmInfo deer = new AlarmInfo();
+            deer.setMeterno(vmAmeterRlgs.getMeter_no());
+            deer.setCurrentheatnumber(vmAmeterRlgs.getDqrl());
+            deer.setFlowrate(vmAmeterRlgs.getLs());
+            deer.setHeatpower(vmAmeterRlgs.getGl());
+            deer.setReturnwatertemperature(vmAmeterRlgs.getHswd());
+            deer.setSupplywatertemperature(vmAmeterRlgs.getGswd());
+            deer.setTotalflow(vmAmeterRlgs.getLjll());
+            deer.setWdc(vmAmeterRlgs.getWdc());
+            deer.setCurrentTime(vmAmeterRlgs.getCjq_time());
+            deerList.add(deer);
+        }
+        resultMap.put("deer",deerList);
+        //
+        return resultMap;
+    }
+
 }

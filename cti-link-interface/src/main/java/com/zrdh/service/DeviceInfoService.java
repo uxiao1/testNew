@@ -1,6 +1,11 @@
 package com.zrdh.service;
 
+import com.zrdh.entity.AlarmConditions;
+import com.zrdh.entity.AlarmInfo;
+
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Description: cti-link-dataAnalysis
@@ -15,4 +20,10 @@ public interface DeviceInfoService {
      */
     String getCurrentTemperature(Date date);
 
+    /**
+     * 根据报警信息条件查询出告警设备基本信息
+     * @param alarmConditions
+     * @return
+     */
+    Map<String, List<AlarmInfo>> queryforAlarmInfo(AlarmConditions alarmConditions);
 }

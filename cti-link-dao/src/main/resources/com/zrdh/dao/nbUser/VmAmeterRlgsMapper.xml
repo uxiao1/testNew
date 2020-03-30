@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrdh.dao.nbUser.VmAmeterRlgsMapper" >
+    <resultMap id="BaseResultMap" type="com.zrdh.pojo.nbUser.VmAmeterRlgs" >
+        <id column="sfbm" property="sfbm" jdbcType="INTEGER" />
+        <result column="Meter_no" property="meter_no" jdbcType="VARCHAR" />
+        <result column="Meter_no_cb" property="meter_no_cb" jdbcType="VARCHAR" />
+        <result column="Cjq_time" property="cjq_time" jdbcType="TIMESTAMP" />
+        <result column="Cjqcjtime" property="cjqcjTime" jdbcType="TIMESTAMP" />
+        <result column="Dqrl" property="dqrl" jdbcType="REAL" />
+        <result column="Ljll" property="ljll" jdbcType="REAL" />
+        <result column="Gl" property="gl" jdbcType="REAL" />
+        <result column="Ls" property="ls" jdbcType="REAL" />
+        <result column="Gswd" property="gswd" jdbcType="REAL" />
+        <result column="Hswd" property="hswd" jdbcType="REAL" />
+        <result column="Wdc" property="wdc" jdbcType="REAL" />
+        <result column="Txzt" property="txzt" jdbcType="VARCHAR" />
+        <result column="Center_no" property="center_no" jdbcType="VARCHAR" />
+        <result column="Mpid" property="mpid" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        sfbm,meterNo,meterNoCb,cjqTime,cjqcjTime,dqrl,ljll,gl,ls,gswd,hswd,wdc,txzt,centerNo,mpid
+    </sql>
+
+    <select id="selectByAlarmConditions" parameterType="com.zrdh.entity.AlarmConditions" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from Vw_ameter_data_to_rlgs
+        <where>
+            <if test="gtHeatNumber != null">
+                Dqrl &gt; #{gtHeatNumber}
+            </if>
+            <if test="ltHeatNumber != null">
+                and Dqrl &lt; #{ltHeatNumber}
+            </if>
+            <if test="gtWdc != null">
+                and Wdc &gt; #{gtWdc}
+            </if>
+            <if test="ltWdc != null">
+                and Wdc &lt; #{ltWdc}
+            </if>
+            <if test="gtHeatPower != null">
+                and Gl &gt; #{gtHeatPower}
+            </if>
+            <if test="ltHeatPower != null">
+                and Gl &lt; #{ltHeatPower}
+            </if>
+            <if test="gtTotalFlow != null">
+                and Ljll &gt; #{gtTotalFlow}
+            </if>
+            <if test="ltTotalFlow != null">
+                and Ljll &lt; #{ltTotalFlow}
+            </if>
+            <if test="gtFlowrate != null">
+                and Ls &gt; #{gtFlowrate}
+            </if>
+            <if test="ltFlowrate != null">
+                and Ls &lt; #{ltFlowrate}
+            </if>
+        </where>
+    </select>
+</mapper>
