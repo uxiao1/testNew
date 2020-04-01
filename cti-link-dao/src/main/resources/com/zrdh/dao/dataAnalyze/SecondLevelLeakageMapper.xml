@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrdh.dao.dataAnalyze.SecondLevelLeakageMapper" >
+  <resultMap id="BaseResultMap" type="com.zrdh.pojo.dataAnalyze.SecondLevelLeakage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="tagId" property="tagid" jdbcType="INTEGER" />
+    <result column="tagCurHeatNumer" property="tagcurheatnumer" jdbcType="DOUBLE" />
+    <result column="hyCurHeatNumber" property="hycurheatnumber" jdbcType="DOUBLE" />
+    <result column="leakageNumber" property="leakagenumber" jdbcType="DOUBLE" />
+    <result column="hyHeatPower" property="hyheatpower" jdbcType="REAL" />
+    <result column="hyWdc" property="hywdc" jdbcType="REAL" />
+    <result column="temperature" property="temperature" jdbcType="VARCHAR" />
+    <result column="currentTime" property="currenttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, tagId, tagCurHeatNumer, hyCurHeatNumber, leakageNumber, hyHeatPower, hyWdc, temperature, 
+    currentTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from second_level_leakage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from second_level_leakage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zrdh.pojo.dataAnalyze.SecondLevelLeakage" >
+    insert into second_level_leakage (id, tagId, tagCurHeatNumer, 
+      hyCurHeatNumber, leakageNumber, hyHeatPower, 
+      hyWdc, temperature, currentTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{tagid,jdbcType=INTEGER}, #{tagcurheatnumer,jdbcType=DOUBLE}, 
+      #{hycurheatnumber,jdbcType=DOUBLE}, #{leakagenumber,jdbcType=DOUBLE}, #{hyheatpower,jdbcType=REAL}, 
+      #{hywdc,jdbcType=REAL}, #{temperature,jdbcType=VARCHAR}, #{currenttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zrdh.pojo.dataAnalyze.SecondLevelLeakage" >
+    insert into second_level_leakage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tagid != null" >
+        tagId,
+      </if>
+      <if test="tagcurheatnumer != null" >
+        tagCurHeatNumer,
+      </if>
+      <if test="hycurheatnumber != null" >
+        hyCurHeatNumber,
+      </if>
+      <if test="leakagenumber != null" >
+        leakageNumber,
+      </if>
+      <if test="hyheatpower != null" >
+        hyHeatPower,
+      </if>
+      <if test="hywdc != null" >
+        hyWdc,
+      </if>
+      <if test="temperature != null" >
+        temperature,
+      </if>
+      <if test="currenttime != null" >
+        currentTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tagid != null" >
+        #{tagid,jdbcType=INTEGER},
+      </if>
+      <if test="tagcurheatnumer != null" >
+        #{tagcurheatnumer,jdbcType=DOUBLE},
+      </if>
+      <if test="hycurheatnumber != null" >
+        #{hycurheatnumber,jdbcType=DOUBLE},
+      </if>
+      <if test="leakagenumber != null" >
+        #{leakagenumber,jdbcType=DOUBLE},
+      </if>
+      <if test="hyheatpower != null" >
+        #{hyheatpower,jdbcType=REAL},
+      </if>
+      <if test="hywdc != null" >
+        #{hywdc,jdbcType=REAL},
+      </if>
+      <if test="temperature != null" >
+        #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="currenttime != null" >
+        #{currenttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zrdh.pojo.dataAnalyze.SecondLevelLeakage" >
+    update second_level_leakage
+    <set >
+      <if test="tagid != null" >
+        tagId = #{tagid,jdbcType=INTEGER},
+      </if>
+      <if test="tagcurheatnumer != null" >
+        tagCurHeatNumer = #{tagcurheatnumer,jdbcType=DOUBLE},
+      </if>
+      <if test="hycurheatnumber != null" >
+        hyCurHeatNumber = #{hycurheatnumber,jdbcType=DOUBLE},
+      </if>
+      <if test="leakagenumber != null" >
+        leakageNumber = #{leakagenumber,jdbcType=DOUBLE},
+      </if>
+      <if test="hyheatpower != null" >
+        hyHeatPower = #{hyheatpower,jdbcType=REAL},
+      </if>
+      <if test="hywdc != null" >
+        hyWdc = #{hywdc,jdbcType=REAL},
+      </if>
+      <if test="temperature != null" >
+        temperature = #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="currenttime != null" >
+        currentTime = #{currenttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zrdh.pojo.dataAnalyze.SecondLevelLeakage" >
+    update second_level_leakage
+    set tagId = #{tagid,jdbcType=INTEGER},
+      tagCurHeatNumer = #{tagcurheatnumer,jdbcType=DOUBLE},
+      hyCurHeatNumber = #{hycurheatnumber,jdbcType=DOUBLE},
+      leakageNumber = #{leakagenumber,jdbcType=DOUBLE},
+      hyHeatPower = #{hyheatpower,jdbcType=REAL},
+      hyWdc = #{hywdc,jdbcType=REAL},
+      temperature = #{temperature,jdbcType=VARCHAR},
+      currentTime = #{currenttime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

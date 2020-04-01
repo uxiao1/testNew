@@ -331,43 +331,47 @@
     select
     <include refid="Base_Column_List" />
     from
-    (   <include refid="newest_data"/>    )
-    where
-    <if test="gtHeatNumber != null">
-      CurrentHeatNumber &gt; #{gtHeatNumber}
-    </if>
-    <if test="ltHeatNumber != null">
-      CurrentHeatNumber &lt; #{ltHeatNumber}
-    </if>
-    <if test="gtWdc != null">
-      Wdc &gt; #{gtWdc}
-    </if>
-    <if test="ltWdc != null">
-      Wdc &lt; #{ltWdc}
-    </if>
-    <if test="gtHeatPower != null">
-      HeatPower &gt; #{gtHeatPower}
-    </if>
-    <if test="ltHeatPower != null">
-      HeatPower &lt; #{ltHeatPower}
-    </if>
-    <if test="gtTotalFlow != null">
-      TotalFlow &gt; #{gtTotalFlow}
-    </if>
-    <if test="ltTotalFlow != null">
-      TotalFlow &lt; #{ltTotalFlow}
-    </if>
-    <if test="gtVoltage != null">
-      Voltage &gt; #{gtVoltage}
-    </if>
-    <if test="ltVoltage != null">
-      Voltage &lt; #{ltVoltage}
-    </if>
-    <if test="gtFlowrate != null">
-      FlowRate &gt; #{gtFlowrate}
-    </if>
-    <if test="ltFlowrate != null">
-      FlowRate &lt; #{ltFlowrate}
-    </if>
+        (
+            SELECT
+            hm.*
+            FROM
+            HM_NormalDecodeData partition (${partition})  hm,
+            ( SELECT MeterNo, MAX( DecodeTime ) AS DecodeTime FROM HM_NormalDecodeData partition (${partition})  GROUP BY MeterNo ) maxTime
+            WHERE
+            hm.DecodeTime = maxTime.DecodeTime
+            AND hm.MeterNo = maxTime.MeterNo
+        ) m
+    <where>
+      <if test="gtHeatNumber != null">
+        m.CurrentHeatNumber &gt; #{gtHeatNumber}
+      </if>
+      <if test="ltHeatNumber != null">
+        and m.CurrentHeatNumber &lt; #{ltHeatNumber}
+      </if>
+      <if test="gtWdc != null">
+        and m.Wdc &gt; #{gtWdc}
+      </if>
+      <if test="ltWdc != null">
+        and m.Wdc &lt; #{ltWdc}
+      </if>
+      <if test="gtHeatPower != null">
+        and m.HeatPower &gt; #{gtHeatPower}
+      </if>
+      <if test="ltHeatPower != null">
+        and m.HeatPower &lt; #{ltHeatPower}
+      </if>
+      <if test="gtTotalFlow != null">
+        and m.TotalFlow &gt; #{gtTotalFlow}
+      </if>
+      <if test="ltTotalFlow != null">
+        and m.TotalFlow &lt; #{ltTotalFlow}
+      </if>
+      <if test="gtFlowrate != null">
+        and m.FlowRate &gt; #{gtFlowrate}
+      </if>
+      <if test="ltFlowrate != null">
+        and m.FlowRate &lt; #{ltFlowrate}
+      </if>
+    </where>
   </select>
 </mapper>

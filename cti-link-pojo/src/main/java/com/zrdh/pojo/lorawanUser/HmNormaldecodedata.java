@@ -19,11 +19,11 @@ public class HmNormaldecodedata extends HmNormaldecodedataKey {
 
     private Float currentcoldnumber;
 
-    private Float currentheatnumber;
+    private Float currentheatnumber;        //热量
 
     private Float origincurrentheatnumber;
 
-    private Float heatpower;
+    private Float heatpower;    //功率
 
     private Float flowrate;     //瞬时流量
 

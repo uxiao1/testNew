@@ -3,6 +3,7 @@ package com.zrdh.dao.lorawanUser;
 import com.zrdh.entity.AlarmConditions;
 import com.zrdh.pojo.lorawanUser.HmNormaldecodedata;
 import com.zrdh.pojo.lorawanUser.HmNormaldecodedataKey;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface HmNormaldecodedataMapper {
      * @return
      */
     List<HmNormaldecodedata> selectByAlarmConditions(AlarmConditions alarmConditions);
+
+    HmNormaldecodedata selectByHouseCard(@Param("cardNumber") int cardNumber,@Param("partition") String partition);
 }

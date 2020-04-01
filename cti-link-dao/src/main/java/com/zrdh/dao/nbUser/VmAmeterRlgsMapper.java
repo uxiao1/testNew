@@ -22,4 +22,7 @@ public interface VmAmeterRlgsMapper {
      * @return
      */
     List<VmAmeterRlgs> selectByAlarmConditions(AlarmConditions alarmConditions);
+
+    @Select("select * from Vw_ameter_data_to_rlgs where sfbm = #{cardNumber}")
+    VmAmeterRlgs selectBySfbm(@Param("cardNumber") int cardNumber);
 }

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrdh.dao.dataAnalyze.FirstLevelLeakageMapper" >
+  <resultMap id="BaseResultMap" type="com.zrdh.pojo.dataAnalyze.FirstLevelLeakage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dcId" property="dcid" jdbcType="INTEGER" />
+    <result column="dcCurHeatNumer" property="dccurheatnumer" jdbcType="DOUBLE" />
+    <result column="rlzCUrHeatNumber" property="rlzcurheatnumber" jdbcType="DOUBLE" />
+    <result column="leakageNumber" property="leakagenumber" jdbcType="DOUBLE" />
+    <result column="temperature" property="temperature" jdbcType="VARCHAR" />
+    <result column="currentTime" property="currenttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, dcId, dcCurHeatNumer, rlzCUrHeatNumber, leakageNumber, temperature, currentTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from first_level_leakage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from first_level_leakage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zrdh.pojo.dataAnalyze.FirstLevelLeakage" >
+    insert into first_level_leakage (id, dcId, dcCurHeatNumer, 
+      rlzCUrHeatNumber, leakageNumber, temperature, 
+      currentTime)
+    values (#{id,jdbcType=INTEGER}, #{dcid,jdbcType=INTEGER}, #{dccurheatnumer,jdbcType=DOUBLE}, 
+      #{rlzcurheatnumber,jdbcType=DOUBLE}, #{leakagenumber,jdbcType=DOUBLE}, #{temperature,jdbcType=VARCHAR}, 
+      #{currenttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zrdh.pojo.dataAnalyze.FirstLevelLeakage" >
+    insert into first_level_leakage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dcid != null" >
+        dcId,
+      </if>
+      <if test="dccurheatnumer != null" >
+        dcCurHeatNumer,
+      </if>
+      <if test="rlzcurheatnumber != null" >
+        rlzCUrHeatNumber,
+      </if>
+      <if test="leakagenumber != null" >
+        leakageNumber,
+      </if>
+      <if test="temperature != null" >
+        temperature,
+      </if>
+      <if test="currenttime != null" >
+        currentTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dcid != null" >
+        #{dcid,jdbcType=INTEGER},
+      </if>
+      <if test="dccurheatnumer != null" >
+        #{dccurheatnumer,jdbcType=DOUBLE},
+      </if>
+      <if test="rlzcurheatnumber != null" >
+        #{rlzcurheatnumber,jdbcType=DOUBLE},
+      </if>
+      <if test="leakagenumber != null" >
+        #{leakagenumber,jdbcType=DOUBLE},
+      </if>
+      <if test="temperature != null" >
+        #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="currenttime != null" >
+        #{currenttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zrdh.pojo.dataAnalyze.FirstLevelLeakage" >
+    update first_level_leakage
+    <set >
+      <if test="dcid != null" >
+        dcId = #{dcid,jdbcType=INTEGER},
+      </if>
+      <if test="dccurheatnumer != null" >
+        dcCurHeatNumer = #{dccurheatnumer,jdbcType=DOUBLE},
+      </if>
+      <if test="rlzcurheatnumber != null" >
+        rlzCUrHeatNumber = #{rlzcurheatnumber,jdbcType=DOUBLE},
+      </if>
+      <if test="leakagenumber != null" >
+        leakageNumber = #{leakagenumber,jdbcType=DOUBLE},
+      </if>
+      <if test="temperature != null" >
+        temperature = #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="currenttime != null" >
+        currentTime = #{currenttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zrdh.pojo.dataAnalyze.FirstLevelLeakage" >
+    update first_level_leakage
+    set dcId = #{dcid,jdbcType=INTEGER},
+      dcCurHeatNumer = #{dccurheatnumer,jdbcType=DOUBLE},
+      rlzCUrHeatNumber = #{rlzcurheatnumber,jdbcType=DOUBLE},
+      leakageNumber = #{leakagenumber,jdbcType=DOUBLE},
+      temperature = #{temperature,jdbcType=VARCHAR},
+      currentTime = #{currenttime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

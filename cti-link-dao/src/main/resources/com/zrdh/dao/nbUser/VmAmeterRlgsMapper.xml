@@ -19,7 +19,7 @@
         <result column="Mpid" property="mpid" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Base_Column_List" >
-        sfbm,meterNo,meterNoCb,cjqTime,cjqcjTime,dqrl,ljll,gl,ls,gswd,hswd,wdc,txzt,centerNo,mpid
+        sfbm,meter_no,meter_no_cb,cjq_time,cjqcjTime,dqrl,ljll,gl,ls,gswd,hswd,wdc,txzt,center_no,mpid
     </sql>
 
     <select id="selectByAlarmConditions" parameterType="com.zrdh.entity.AlarmConditions" resultMap="BaseResultMap">

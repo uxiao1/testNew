@@ -3,9 +3,8 @@ package com.zrdh;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.zrdh.entity.AlarmConditions;
 import com.zrdh.entity.AlarmInfo;
-import com.zrdh.pojo.nbUser.VmAmeterRlgs;
 import com.zrdh.service.DeviceInfoService;
-import com.zrdh.service.TestService;
+import com.zrdh.utils.LorawanPartition;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,8 +21,6 @@ import java.util.*;
 public class TestSome {
 
     @Reference
-    private TestService testService;
-    @Reference
     private DeviceInfoService deviceInfoService;
 
     @Test
@@ -31,21 +28,11 @@ public class TestSome {
         AlarmConditions alarmConditions = new AlarmConditions();
         alarmConditions.setGtHeatNumber((float) 100);
         alarmConditions.setLtHeatNumber((float) 500);
-        List<AlarmInfo> alarmInfoList = deviceInfoService.queryforAlarmInfo(alarmConditions);
-        System.out.println(alarmInfoList);
+        alarmConditions.setPartition(LorawanPartition.getPartitionByDate(new Date()));
+        Map<String, List<AlarmInfo>> alarmInfo = deviceInfoService.queryforAlarmInfo(alarmConditions);
+        System.out.println(alarmInfo.toString());
     }
 
-    @Test
-    public void test(){
-        VmAmeterRlgs vmAmeterRlgs = testService.selectByMeterNo("81318075");
-        System.out.println(vmAmeterRlgs);
-    }
-
-
-    @Test
-    public void testTwo(){
-        System.out.println("-----------------------------------"+testService.findById(1)+"------------------------------------");
-    }
 
     /**
      * 随机生成10个字母,并按照从小到大的顺序排序

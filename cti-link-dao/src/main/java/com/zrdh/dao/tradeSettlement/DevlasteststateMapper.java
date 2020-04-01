@@ -3,6 +3,8 @@ package com.zrdh.dao.tradeSettlement;
 import com.zrdh.entity.AlarmConditions;
 import com.zrdh.pojo.tradeSettlement.Devlasteststate;
 import com.zrdh.pojo.tradeSettlement.DevlasteststateKey;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -25,4 +27,12 @@ public interface DevlasteststateMapper {
      * @return
      */
     List<Devlasteststate> selectByAlarmCoditions(AlarmConditions alarmConditions);
+
+    /**
+     * 根据仪表号查找
+     * @param meterid
+     * @return
+     */
+    @Select("SELECT * FROM `newestdata` where DtuId = #{meterid}")
+    Devlasteststate selectByMeterNo(@Param("meterid") String meterid);
 }

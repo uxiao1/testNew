@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description: cti-link-dataAnalysis
@@ -29,8 +30,8 @@ public class DeviceInfoController {
         Result result = new Result();
         try {
             result.setRstCode(0);
-            List<AlarmInfo> alarmInfoList = deviceInfoService.queryforAlarmInfo(alarmConditions);
-            result.setRstData(alarmInfoList);
+            Map<String, List<AlarmInfo>> resultMap = deviceInfoService.queryforAlarmInfo(alarmConditions);
+            result.setRstData(resultMap);
         } catch (Exception e) {
             e.printStackTrace();
             result.setRstCode(1);
@@ -41,7 +42,7 @@ public class DeviceInfoController {
 
     /**
      * 提供各级设备的用量/瞬时热量/温差曲线以及开封市实时温度曲线
-     * 未填写默认24小时
+     * 未填写默认最近24小时
      */
     @GetMapping("/queryDeviceInfoCurve")
     public Result queryDeviceInfoCurve(@RequestParam(required = false) Long beginTime,@RequestParam(required = false) Long endTime){
@@ -71,7 +72,7 @@ public class DeviceInfoController {
         Result result = new Result();
         try {
             result.setRstCode(0);
-
+            //取定时任务存的表的数据
         } catch (Exception e) {
             e.printStackTrace();
             result.setRstCode(1);
@@ -81,7 +82,7 @@ public class DeviceInfoController {
 
     /**
      * 提供一二级管网漏损
-     * 未填写默认24小时
+     * 未填写默认2最近4小时
      */
     @GetMapping("/queryFirstAndSecondLeakage")
     public Result queryFirstAndSecondLeakage(@RequestParam(required = false) Long beginTime,@RequestParam(required = false) Long endTime){

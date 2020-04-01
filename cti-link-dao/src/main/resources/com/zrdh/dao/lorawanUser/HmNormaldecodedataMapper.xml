@@ -331,38 +331,66 @@
     select
     <include refid="Base_Column_List" />
     from
-    (   <include refid="newest_data"/>    )
+        (
+            SELECT
+            hm.*
+            FROM
+            HM_NormalDecodeData partition (${partition})  hm,
+            ( SELECT MeterNo, MAX( DecodeTime ) AS DecodeTime FROM HM_NormalDecodeData partition (${partition})  GROUP BY MeterNo ) maxTime
+            WHERE
+            hm.DecodeTime = maxTime.DecodeTime
+            AND hm.MeterNo = maxTime.MeterNo
+        ) m
     <where>
       <if test="gtHeatNumber != null">
-        CurrentHeatNumber &gt; #{gtHeatNumber}
+        m.CurrentHeatNumber &gt; #{gtHeatNumber}
       </if>
       <if test="ltHeatNumber != null">
-        and CurrentHeatNumber &lt; #{ltHeatNumber}
+        and m.CurrentHeatNumber &lt; #{ltHeatNumber}
       </if>
       <if test="gtWdc != null">
-        and Wdc &gt; #{gtWdc}
+        and m.Wdc &gt; #{gtWdc}
       </if>
       <if test="ltWdc != null">
-        and Wdc &lt; #{ltWdc}
+        and m.Wdc &lt; #{ltWdc}
       </if>
       <if test="gtHeatPower != null">
-        and HeatPower &gt; #{gtHeatPower}
+        and m.HeatPower &gt; #{gtHeatPower}
       </if>
       <if test="ltHeatPower != null">
-        and HeatPower &lt; #{ltHeatPower}
+        and m.HeatPower &lt; #{ltHeatPower}
       </if>
       <if test="gtTotalFlow != null">
-        and TotalFlow &gt; #{gtTotalFlow}
+        and m.TotalFlow &gt; #{gtTotalFlow}
       </if>
       <if test="ltTotalFlow != null">
-        and TotalFlow &lt; #{ltTotalFlow}
+        and m.TotalFlow &lt; #{ltTotalFlow}
       </if>
       <if test="gtFlowrate != null">
-        and FlowRate &gt; #{gtFlowrate}
+        and m.FlowRate &gt; #{gtFlowrate}
       </if>
       <if test="ltFlowrate != null">
-        and FlowRate &lt; #{ltFlowrate}
+        and m.FlowRate &lt; #{ltFlowrate}
       </if>
     </where>
+  </select>
+
+  <select id="selectByHouseCard"  resultMap="BaseResultMap">
+    select
+    m.*
+    from
+    `UM_UserData` USER,
+    (
+            SELECT
+            hm.*
+            FROM
+            HM_NormalDecodeData partition (${partition})  hm,
+            ( SELECT MeterNo, MAX( DecodeTime ) AS DecodeTime FROM HM_NormalDecodeData partition (${partition})  GROUP BY MeterNo ) maxTime
+            WHERE
+            hm.DecodeTime = maxTime.DecodeTime
+            AND hm.MeterNo = maxTime.MeterNo
+    ) m
+    where USER.meterNo = m.MeterNo
+	AND USER.housecard = #{cardNumber}
   </select>
 </mapper>

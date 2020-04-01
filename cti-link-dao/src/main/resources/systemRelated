@@ -1,0 +1,13 @@
+1.lorawan和deer主要通过heatstation热力站表和plot小区表以及cardnumberaddress表关联
+
+    heatstation表的hid-------------------->plot表的hid
+    plot表的name-------------------------->cardnumberaddress表的C_BoroughName
+    cardnumberaddress表的C_cardNumber----------------->deer视图的sfbm
+    cardnumberaddress表的C_cardNumber----------------->lorawan的userData的houseId
+    lorawan的userData表的meterNo------------------->lorawan的hmNormalData的meterNo
+
+
+2.贸易结算系统
+
+    tradeRelated表的hid--------------------->heatstation表的hid
+    heatstation表中0为电厂

@@ -8,10 +8,10 @@ import java.sql.*;
  */
 public class JDBCUtil {
     // 定义静态变量，使用静态代码获取配置文件的值
-    private static String url;
-    private static String user;
-    private static String password;
-    private static String driver;
+    private static String url = "jdbc:mysql://218.206.209.50:13306/data-analyze?useUnicode=true&characterEncoding=UTF-8";
+    private static String user = "dataanalyze";
+    private static String password = "ctitech123";
+    private static String driver = "com.mysql.jdbc.Driver";
     /*// 使用静态代码注册驱动并给静态变量赋值
     static{
         try {
@@ -38,6 +38,13 @@ public class JDBCUtil {
             e.printStackTrace();
         }
     }*/
+    static {
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);

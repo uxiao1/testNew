@@ -3,63 +3,50 @@ package com.zrdh.pojo.tradeSettlement;
 import java.util.Date;
 
 public class Devlasteststate extends DevlasteststateKey {
-    private Float curwaterflow;
+    private Float flowrate;        //瞬时流量
 
-    private Float curheatnum;
+    private Float heatpower;        //功率
 
-    private Integer totalwaterflow;
+    private Integer curwaterflow;   //总流量
 
-    private Integer totalheatnum;
+    private Integer curheatnum;     //热量
 
     private Float supplywatertmp;
 
     private Float returnwatertmp;
 
-    private Date lastupdatetime;
+    private Date lastsynctime;
 
-    @Override
-    public String toString() {
-        return "Devlasteststate{" +
-                "curwaterflow=" + curwaterflow +
-                ", curheatnum=" + curheatnum +
-                ", totalwaterflow=" + totalwaterflow +
-                ", totalheatnum=" + totalheatnum +
-                ", supplywatertmp=" + supplywatertmp +
-                ", returnwatertmp=" + returnwatertmp +
-                ", lastupdatetime=" + lastupdatetime +
-                '}';
+    public Float getFlowrate() {
+        return flowrate;
     }
 
-    public Float getCurwaterflow() {
+    public void setFlowrate(Float flowrate) {
+        this.flowrate = flowrate;
+    }
+
+    public Float getHeatpower() {
+        return heatpower;
+    }
+
+    public void setHeatpower(Float heatpower) {
+        this.heatpower = heatpower;
+    }
+
+    public Integer getCurwaterflow() {
         return curwaterflow;
     }
 
-    public void setCurwaterflow(Float curwaterflow) {
+    public void setCurwaterflow(Integer curwaterflow) {
         this.curwaterflow = curwaterflow;
     }
 
-    public Float getCurheatnum() {
+    public Integer getCurheatnum() {
         return curheatnum;
     }
 
-    public void setCurheatnum(Float curheatnum) {
+    public void setCurheatnum(Integer curheatnum) {
         this.curheatnum = curheatnum;
-    }
-
-    public Integer getTotalwaterflow() {
-        return totalwaterflow;
-    }
-
-    public void setTotalwaterflow(Integer totalwaterflow) {
-        this.totalwaterflow = totalwaterflow;
-    }
-
-    public Integer getTotalheatnum() {
-        return totalheatnum;
-    }
-
-    public void setTotalheatnum(Integer totalheatnum) {
-        this.totalheatnum = totalheatnum;
     }
 
     public Float getSupplywatertmp() {
@@ -78,11 +65,11 @@ public class Devlasteststate extends DevlasteststateKey {
         this.returnwatertmp = returnwatertmp;
     }
 
-    public Date getLastupdatetime() {
-        return lastupdatetime;
+    public Date getLastsynctime() {
+        return lastsynctime;
     }
 
-    public void setLastupdatetime(Date lastupdatetime) {
-        this.lastupdatetime = lastupdatetime;
+    public void setLastsynctime(Date lastsynctime) {
+        this.lastsynctime = lastsynctime;
     }
 }

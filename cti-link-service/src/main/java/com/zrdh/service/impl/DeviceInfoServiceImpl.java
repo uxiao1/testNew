@@ -15,7 +15,9 @@ import com.zrdh.pojo.nbUser.VmAmeterRlgs;
 import com.zrdh.pojo.tradeSettlement.Devlasteststate;
 import com.zrdh.service.DeviceInfoService;
 import com.zrdh.utils.HttpClientUtil;
-import org.springframework.beans.BeanUtils;
+import com.zrdh.utils.LorawanPartition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.ParseException;
@@ -39,6 +41,8 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     private DevlasteststateMapper devlasteststateMapper; //贸易结算系统
     @Autowired
     private VmAmeterRlgsMapper vmAmeterRlgsMapper; //德尔系统(nb)
+
+    private Logger logger = LoggerFactory.getLogger(DeviceInfoServiceImpl.class);
 
     @Override
     public String getCurrentTemperature(Date date) {
@@ -88,16 +92,52 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
         if(alarmConditions == null){
             return null;
         }
-        HashMap<String, List<AlarmInfo>> resultMap = new HashMap<>();
-        //---------------------------lorawan系统-----------------------------
-        List<HmNormaldecodedata> normaldecodedataList = normaldecodedataMapper.selectByAlarmConditions(alarmConditions);
-        List<AlarmInfo> lorawanList = new ArrayList<>();
-        BeanUtils.copyProperties(normaldecodedataList,lorawanList);
-        resultMap.put("loranwan",lorawanList);
+        //查询指定分区,带入数据库查询
+        alarmConditions.setPartition(LorawanPartition.getPartitionByDate(new Date()));
 
-        //---------------------------贸易结算系统    TODO 字段名还未调整----------------------
+        HashMap<String, List<AlarmInfo>> resultMap = new HashMap<>();
+        //---------------------------lorawan系统  ----------------------------
+        List<HmNormaldecodedata> normaldecodedataList = normaldecodedataMapper.selectByAlarmConditions(alarmConditions);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<AlarmInfo> lorawanList = new ArrayList<>();
+        for (HmNormaldecodedata normaldecodedata : normaldecodedataList) {
+            AlarmInfo alarmInfo = new AlarmInfo();
+            alarmInfo.setCurrentheatnumber(normaldecodedata.getCurrentheatnumber());
+            alarmInfo.setFlowrate(normaldecodedata.getFlowrate());
+            alarmInfo.setMeterno(normaldecodedata.getMeterno());
+            alarmInfo.setHeatpower(normaldecodedata.getHeatpower());
+            alarmInfo.setReturnwatertemperature(normaldecodedata.getReturnwatertemperature());
+            alarmInfo.setSupplywatertemperature(normaldecodedata.getSupplywatertemperature());
+            alarmInfo.setTotalflow(normaldecodedata.getTotalflow());
+            alarmInfo.setWdc(normaldecodedata.getWdc());
+            try {
+                alarmInfo.setCurrentTime(dateFormat.parse(normaldecodedata.getCurrenttime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            lorawanList.add(alarmInfo);
+        }
+        resultMap.put("loranwan",lorawanList);
+        logger.debug("-----------------------lorawan系统告警信息数据:"+lorawanList.toString()+"-------------------------");
+
+        //---------------------------贸易结算系统----------------------------
         List<Devlasteststate> devlasteststateList = devlasteststateMapper.selectByAlarmCoditions(alarmConditions);
-        //添加入集合
+        List<AlarmInfo> tradeList = new ArrayList<>();
+        for (Devlasteststate devlasteststate : devlasteststateList) {
+            AlarmInfo trade = new AlarmInfo();
+            trade.setCurrentTime(devlasteststate.getLastsynctime());
+            trade.setWdc(devlasteststate.getSupplywatertmp()-devlasteststate.getReturnwatertmp());
+            trade.setTotalflow(Float.valueOf(devlasteststate.getCurwaterflow()));
+            trade.setSupplywatertemperature(devlasteststate.getSupplywatertmp());
+            trade.setReturnwatertemperature(devlasteststate.getReturnwatertmp());
+            trade.setHeatpower(devlasteststate.getHeatpower());
+            trade.setMeterno(devlasteststate.getDtuid());
+            trade.setFlowrate(devlasteststate.getFlowrate());
+            trade.setCurrentheatnumber(Float.valueOf(devlasteststate.getCurheatnum()));
+            tradeList.add(trade);
+        }
+        resultMap.put("trade",tradeList);
+        logger.debug("-----------------------贸易结算系统告警信息数据:"+tradeList.toString()+"-------------------------");
 
         //----------------------------deer(nb)系统--------------------------------
         List<VmAmeterRlgs> vmAmeterRlgsList = vmAmeterRlgsMapper.selectByAlarmConditions(alarmConditions);
@@ -116,6 +156,7 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
             deerList.add(deer);
         }
         resultMap.put("deer",deerList);
+        logger.debug("-----------------------德尔系统告警信息数据:"+deerList.toString()+"-------------------------");
         //
         return resultMap;
     }

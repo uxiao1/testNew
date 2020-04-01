@@ -19,6 +19,15 @@ public class AlarmConditions implements Serializable {
     private Float ltTotalFlow;      //小于总流量
     private Float gtFlowrate;       //超过水流速
     private Float ltFlowrate;       //小于水流速
+    private String partition;       //分区
+
+    public String getPartition() {
+        return partition;
+    }
+
+    public void setPartition(String partition) {
+        this.partition = partition;
+    }
 
     public Float getGtHeatNumber() {
         return gtHeatNumber;
