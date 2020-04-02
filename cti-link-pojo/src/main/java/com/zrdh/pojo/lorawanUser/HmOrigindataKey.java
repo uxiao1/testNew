@@ -1,8 +1,9 @@
 package com.zrdh.pojo.lorawanUser;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HmOrigindataKey {
+public class HmOrigindataKey implements Serializable {
     private Integer dataid;
 
     private Date receivetime;

@@ -1,6 +1,8 @@
 package com.zrdh.pojo.dataAnalyze;
 
-public class Cardnumberaddress {
+import java.io.Serializable;
+
+public class Cardnumberaddress implements Serializable {
     private Integer id;
 
     private String cBoroughname;
@@ -20,6 +22,22 @@ public class Cardnumberaddress {
     private String cEnroladdress;
 
     private Integer iBuildingid;
+
+    @Override
+    public String toString() {
+        return "Cardnumberaddress{" +
+                "id=" + id +
+                ", cBoroughname='" + cBoroughname + '\'' +
+                ", cBuildingname='" + cBuildingname + '\'' +
+                ", iBoroughid=" + iBoroughid +
+                ", iRoomid=" + iRoomid +
+                ", cCardnum='" + cCardnum + '\'' +
+                ", cRoomnum='" + cRoomnum + '\'' +
+                ", iCell='" + iCell + '\'' +
+                ", cEnroladdress='" + cEnroladdress + '\'' +
+                ", iBuildingid=" + iBuildingid +
+                '}';
+    }
 
     public Integer getId() {
         return id;

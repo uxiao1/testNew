@@ -1,8 +1,9 @@
 package com.zrdh.pojo.lorawanUser;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HmLongfaultdecodedataKey {
+public class HmLongfaultdecodedataKey implements Serializable {
     private Integer dataid;
 
     private Date decodetime;

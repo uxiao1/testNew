@@ -27,8 +27,8 @@
         <property name="jobDetail" ref="firstLeaveJobDetail"></property>
         <!--指定触发的时间,给予cron表达式-->
         <property name="cronExpression">
-<!--            <value>0/10 * * * * ?</value>-->
-            <value>0 0/10 * * * ?</value>
+            <value>0 0/5 * * * ?</value>
+<!--            <value>0 0/10 * * * ?</value>-->
         </property>
     </bean>
 
@@ -43,8 +43,8 @@
         <property name="jobDetail" ref="SecondLeaveJobDetail"></property>
         <!--指定触发的时间,给予cron表达式-->
         <property name="cronExpression">
-<!--            <value>0/20 * * * * ? *</value>-->
-            <value>0 0 0,12 * * ? *</value>
+            <value>0 0/10 * * * ?</value>
+<!--            <value>0 0 0,12 * * ? *</value>-->
         </property>
     </bean>
 

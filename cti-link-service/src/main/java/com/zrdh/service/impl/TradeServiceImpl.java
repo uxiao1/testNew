@@ -4,7 +4,6 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.zrdh.dao.dataAnalyze.HeatstationMapper;
 import com.zrdh.dao.dataAnalyze.TraderelatedMapper;
 import com.zrdh.dao.dispatchCenter.TagsMapper;
-import com.zrdh.dao.dispatchCenterHistory.TbTagHdbTdMapper;
 import com.zrdh.dao.tradeSettlement.DevlasteststateMapper;
 import com.zrdh.pojo.dataAnalyze.Heatstation;
 import com.zrdh.pojo.dataAnalyze.Traderelated;
@@ -31,8 +30,6 @@ public class TradeServiceImpl implements TradeService {
     private DevlasteststateMapper devlasteststateMapper;
     @Autowired
     private TagsMapper tagsMapper;
-    @Autowired
-    private TbTagHdbTdMapper tbTagHdbTdMapper;
 
     @Override
     public List<Devlasteststate> query4DC() {

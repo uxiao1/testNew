@@ -17,6 +17,19 @@ public class Devlasteststate extends DevlasteststateKey {
 
     private Date lastsynctime;
 
+    @Override
+    public String toString() {
+        return "Devlasteststate{" +
+                "flowrate=" + flowrate +
+                ", heatpower=" + heatpower +
+                ", curwaterflow=" + curwaterflow +
+                ", curheatnum=" + curheatnum +
+                ", supplywatertmp=" + supplywatertmp +
+                ", returnwatertmp=" + returnwatertmp +
+                ", lastsynctime=" + lastsynctime +
+                '}';
+    }
+
     public Float getFlowrate() {
         return flowrate;
     }

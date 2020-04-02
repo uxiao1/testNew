@@ -374,4 +374,23 @@
       </if>
     </where>
   </select>
+
+  <select id="selectByHouseCard"  resultMap="BaseResultMap">
+    select
+    m.*
+    from
+    `UM_UserData` USER,
+    (
+            SELECT
+            hm.*
+            FROM
+            HM_NormalDecodeData partition (${partition})  hm,
+            ( SELECT MeterNo, MAX( DecodeTime ) AS DecodeTime FROM HM_NormalDecodeData partition (${partition})  GROUP BY MeterNo ) maxTime
+            WHERE
+            hm.DecodeTime = maxTime.DecodeTime
+            AND hm.MeterNo = maxTime.MeterNo
+    ) m
+    where USER.meterNo = m.MeterNo
+	AND USER.housecard = #{cardNumber}
+  </select>
 </mapper>

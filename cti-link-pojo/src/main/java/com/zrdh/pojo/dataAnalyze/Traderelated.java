@@ -1,10 +1,12 @@
 package com.zrdh.pojo.dataAnalyze;
 
+import java.io.Serializable;
+
 /**
  * 贸易中心系统关联表  和heatstation表关联
  * 电厂默认hid为0
  */
-public class Traderelated {
+public class Traderelated implements Serializable {
     private Integer id;
 
     private String meterid;

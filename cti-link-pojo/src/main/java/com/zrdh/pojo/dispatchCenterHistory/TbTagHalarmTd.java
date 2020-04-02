@@ -1,11 +1,12 @@
 package com.zrdh.pojo.dispatchCenterHistory;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 报警信息
  */
-public class TbTagHalarmTd {
+public class TbTagHalarmTd implements Serializable {
     private Long id;
 
     private String tagname;

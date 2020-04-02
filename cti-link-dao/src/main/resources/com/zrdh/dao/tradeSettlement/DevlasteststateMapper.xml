@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zrdh.dao.tradeSettlement.DevlasteststateMapper" >
+  <resultMap id="BaseResultMap" type="com.zrdh.pojo.tradeSettlement.Devlasteststate" >
+    <id column="DtuId" property="dtuid" jdbcType="VARCHAR" />
+    <id column="DevName" property="devname" jdbcType="VARCHAR" />
+    <result column="FlowRate" property="flowrate" jdbcType="REAL" />
+    <result column="HeatPower" property="heatpower" jdbcType="REAL" />
+    <result column="CurWaterFlow" property="curwaterflow" jdbcType="INTEGER" />
+    <result column="CurHeatNum" property="curheatnum" jdbcType="INTEGER" />
+    <result column="SupplyWaterTmp" property="supplywatertmp" jdbcType="REAL" />
+    <result column="ReturnWaterTmp" property="returnwatertmp" jdbcType="REAL" />
+    <result column="LastSyncTime" property="lastsynctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DtuId, DevName, FlowRate, HeatPower, CurWaterFlow, CurHeatNum, SupplyWaterTmp, ReturnWaterTmp, 
+    LastSyncTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zrdh.pojo.tradeSettlement.DevlasteststateKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from newestdata
+    where DtuId = #{dtuid,jdbcType=VARCHAR}
+      and DevName = #{devname,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zrdh.pojo.tradeSettlement.DevlasteststateKey" >
+    delete from newestdata
+    where DtuId = #{dtuid,jdbcType=VARCHAR}
+      and DevName = #{devname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zrdh.pojo.tradeSettlement.Devlasteststate" >
+    insert into newestdata (DtuId, DevName, FlowRate,
+      HeatPower, CurWaterFlow, CurHeatNum, 
+      SupplyWaterTmp, ReturnWaterTmp, LastSyncTime
+      )
+    values (#{dtuid,jdbcType=VARCHAR}, #{devname,jdbcType=VARCHAR}, #{flowrate,jdbcType=REAL}, 
+      #{heatpower,jdbcType=REAL}, #{curwaterflow,jdbcType=INTEGER}, #{curheatnum,jdbcType=INTEGER}, 
+      #{supplywatertmp,jdbcType=REAL}, #{returnwatertmp,jdbcType=REAL}, #{lastsynctime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zrdh.pojo.tradeSettlement.Devlasteststate" >
+    insert into newestdata
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dtuid != null" >
+        DtuId,
+      </if>
+      <if test="devname != null" >
+        DevName,
+      </if>
+      <if test="flowrate != null" >
+        FlowRate,
+      </if>
+      <if test="heatpower != null" >
+        HeatPower,
+      </if>
+      <if test="curwaterflow != null" >
+        CurWaterFlow,
+      </if>
+      <if test="curheatnum != null" >
+        CurHeatNum,
+      </if>
+      <if test="supplywatertmp != null" >
+        SupplyWaterTmp,
+      </if>
+      <if test="returnwatertmp != null" >
+        ReturnWaterTmp,
+      </if>
+      <if test="lastsynctime != null" >
+        LastSyncTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dtuid != null" >
+        #{dtuid,jdbcType=VARCHAR},
+      </if>
+      <if test="devname != null" >
+        #{devname,jdbcType=VARCHAR},
+      </if>
+      <if test="flowrate != null" >
+        #{flowrate,jdbcType=REAL},
+      </if>
+      <if test="heatpower != null" >
+        #{heatpower,jdbcType=REAL},
+      </if>
+      <if test="curwaterflow != null" >
+        #{curwaterflow,jdbcType=INTEGER},
+      </if>
+      <if test="curheatnum != null" >
+        #{curheatnum,jdbcType=INTEGER},
+      </if>
+      <if test="supplywatertmp != null" >
+        #{supplywatertmp,jdbcType=REAL},
+      </if>
+      <if test="returnwatertmp != null" >
+        #{returnwatertmp,jdbcType=REAL},
+      </if>
+      <if test="lastsynctime != null" >
+        #{lastsynctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zrdh.pojo.tradeSettlement.Devlasteststate" >
+    update newestdata
+    <set >
+      <if test="flowrate != null" >
+        FlowRate = #{flowrate,jdbcType=REAL},
+      </if>
+      <if test="heatpower != null" >
+        HeatPower = #{heatpower,jdbcType=REAL},
+      </if>
+      <if test="curwaterflow != null" >
+        CurWaterFlow = #{curwaterflow,jdbcType=INTEGER},
+      </if>
+      <if test="curheatnum != null" >
+        CurHeatNum = #{curheatnum,jdbcType=INTEGER},
+      </if>
+      <if test="supplywatertmp != null" >
+        SupplyWaterTmp = #{supplywatertmp,jdbcType=REAL},
+      </if>
+      <if test="returnwatertmp != null" >
+        ReturnWaterTmp = #{returnwatertmp,jdbcType=REAL},
+      </if>
+      <if test="lastsynctime != null" >
+        LastSyncTime = #{lastsynctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DtuId = #{dtuid,jdbcType=VARCHAR}
+      and DevName = #{devname,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zrdh.pojo.tradeSettlement.Devlasteststate" >
+    update newestdata
+    set FlowRate = #{flowrate,jdbcType=REAL},
+      HeatPower = #{heatpower,jdbcType=REAL},
+      CurWaterFlow = #{curwaterflow,jdbcType=INTEGER},
+      CurHeatNum = #{curheatnum,jdbcType=INTEGER},
+      SupplyWaterTmp = #{supplywatertmp,jdbcType=REAL},
+      ReturnWaterTmp = #{returnwatertmp,jdbcType=REAL},
+      LastSyncTime = #{lastsynctime,jdbcType=TIMESTAMP}
+    where DtuId = #{dtuid,jdbcType=VARCHAR}
+      and DevName = #{devname,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="selectByAlarmCoditions" parameterType="com.zrdh.entity.AlarmConditions" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from newestdata
+    <where>
+      <if test="gtHeatNumber != null">
+        CurHeatNum &gt; #{gtHeatNumber}
+      </if>
+      <if test="ltHeatNumber != null">
+        and CurHeatNum &lt; #{ltHeatNumber}
+      </if>
+      <if test="gtWdc != null">
+        and (SupplyWaterTmp-ReturnWaterTmp) &gt; #{gtWdc}
+      </if>
+      <if test="ltWdc != null">
+        and (SupplyWaterTmp-ReturnWaterTmp) &lt; #{ltWdc}
+      </if>
+      <if test="gtHeatPower != null">
+        and HeatPower &gt; #{gtHeatPower}
+      </if>
+      <if test="ltHeatPower != null">
+        and HeatPower &lt; #{ltHeatPower}
+      </if>
+      <if test="gtTotalFlow != null">
+        and CurWaterFlow &gt; #{gtTotalFlow}
+      </if>
+      <if test="ltTotalFlow != null">
+        and CurWaterFlow &lt; #{ltTotalFlow}
+      </if>
+      <if test="gtFlowrate != null">
+        and FlowRate &gt; #{gtFlowrate}
+      </if>
+      <if test="ltFlowrate != null">
+        and FlowRate &lt; #{ltFlowrate}
+      </if>
+    </where>
+  </select>
+</mapper>

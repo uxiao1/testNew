@@ -1,8 +1,9 @@
 package com.zrdh.pojo.dataAnalyze;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FirstLevelLeakage {
+public class FirstLevelLeakage implements Serializable {
     private Integer id;
 
     private Integer dcid;
@@ -16,6 +17,19 @@ public class FirstLevelLeakage {
     private String temperature;
 
     private Date currenttime;
+
+    @Override
+    public String toString() {
+        return "FirstLevelLeakage{" +
+                "id=" + id +
+                ", dcid=" + dcid +
+                ", dccurheatnumer=" + dccurheatnumer +
+                ", rlzcurheatnumber=" + rlzcurheatnumber +
+                ", leakagenumber=" + leakagenumber +
+                ", temperature='" + temperature + '\'' +
+                ", currenttime=" + currenttime +
+                '}';
+    }
 
     public Integer getId() {
         return id;

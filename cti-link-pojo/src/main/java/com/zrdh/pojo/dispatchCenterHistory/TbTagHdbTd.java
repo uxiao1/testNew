@@ -1,11 +1,12 @@
 package com.zrdh.pojo.dispatchCenterHistory;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 存储热力站最新且唯一的数据
  */
-public class TbTagHdbTd {
+public class TbTagHdbTd implements Serializable {
     private Integer id;
 
     private Integer tagid;

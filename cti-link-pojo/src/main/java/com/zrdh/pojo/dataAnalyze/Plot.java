@@ -1,6 +1,8 @@
 package com.zrdh.pojo.dataAnalyze;
 
-public class Plot {
+import java.io.Serializable;
+
+public class Plot implements Serializable {
     private Integer id;
 
     private String name;

@@ -1,6 +1,8 @@
 package com.zrdh.pojo.lorawanUser;
 
-public class UmUserlevel {
+import java.io.Serializable;
+
+public class UmUserlevel implements Serializable {
     private Integer id;
 
     private Integer pid;

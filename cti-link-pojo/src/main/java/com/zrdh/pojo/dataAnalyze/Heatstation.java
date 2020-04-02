@@ -1,6 +1,8 @@
 package com.zrdh.pojo.dataAnalyze;
 
-public class Heatstation {
+import java.io.Serializable;
+
+public class Heatstation implements Serializable {
     private Integer id;
 
     private String name;

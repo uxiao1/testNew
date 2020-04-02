@@ -1,6 +1,8 @@
 package com.zrdh.pojo.lorawanUser;
 
-public class UmUserdata {
+import java.io.Serializable;
+
+public class UmUserdata implements Serializable {
     private Integer id;
 
     private String housecard;

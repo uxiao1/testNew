@@ -1,6 +1,8 @@
 package com.zrdh.pojo.tradeSettlement;
 
-public class DevlasteststateKey {
+import java.io.Serializable;
+
+public class DevlasteststateKey implements Serializable {
     private String dtuid;
 
     private String devname;

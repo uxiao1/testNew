@@ -1,5 +1,7 @@
 package com.zrdh.pojo.lorawanUser;
 
+import java.io.Serializable;
+
 public class HmLongfaultdecodedata extends HmLongfaultdecodedataKey {
     private String devicename;
 

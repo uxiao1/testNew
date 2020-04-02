@@ -1,5 +1,6 @@
 package com.zrdh.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * 返回前端告警信息
  * Created by hua on 2020/3/26 15:40
  */
-public class AlarmInfo {
+public class AlarmInfo implements Serializable {
 
 //    private String DeviceName;      //设备名称
 //    private String voltage;         //电压
