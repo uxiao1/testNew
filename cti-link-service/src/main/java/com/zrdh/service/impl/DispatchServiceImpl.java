@@ -47,6 +47,30 @@ public class DispatchServiceImpl implements DispatchService {
         if(ids.isEmpty()){
             return null;
         }
+        if (ids.size() > 2000){
+            int start = 0;
+            int end = 1000;
+            List<TbTagHdbTd> rlzInfoList = new ArrayList<>();
+            while (true) {
+                end += end;
+                ArrayList<Integer> tempList = new ArrayList<>();
+                if (end > ids.size()) {
+                    end = ids.size();
+                }
+                for (int i = start; i < end; i++) {
+                    tempList.add(ids.get(i));
+                }
+                start = start + end;
+                if(!tempList.isEmpty()) {
+                    List<TbTagHdbTd> tempResult = tbTagHdbTdMapper.selectByTagIds(tempList);
+                    rlzInfoList.addAll(tempResult);
+                }
+                if (end >= ids.size()){
+                    break;
+                }
+            }
+            return rlzInfoList;
+        }
         List<TbTagHdbTd> rlzInfoList = tbTagHdbTdMapper.selectByTagIds(ids);
         return rlzInfoList;
     }
@@ -84,7 +108,7 @@ public class DispatchServiceImpl implements DispatchService {
         String endFormat = dateFormat.format(endTime);
         String endTableName = "tb_tag_hdb_"+endFormat;
         List<TbTagHdbTd> endTbTagHdbTds = tbTagHdbTdMapper.findHistoryByTagIds(tagsIds,endTableName,endTime);
-        if(beginTbTagHdbTds != null && endTbTagHdbTds != null) {
+        if(!beginTbTagHdbTds.isEmpty() && !endTbTagHdbTds.isEmpty()) {
             Double beginHeatNum = 0.00;
             for (TbTagHdbTd beginTbTagHdbTd : beginTbTagHdbTds) {
                 beginHeatNum += beginTbTagHdbTd.getValue();

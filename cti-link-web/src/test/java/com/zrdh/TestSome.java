@@ -2,7 +2,7 @@ package com.zrdh;
 
 import org.junit.Test;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * Description: cti-link-dataAnalysis
@@ -16,7 +16,28 @@ public class TestSome {
 
     @Test
     public void test11(){
-        long x = new Date().getTime() -24 * 60 * 60 * 1000;
-        System.out.println(new Date(x));
+        ArrayList<Integer> cardNumberList = new ArrayList<>();
+        for (int i = 0; i < 50; i++) {
+            cardNumberList.add(i);
+        }
+        int start = 0;
+        int end = 10;
+        if (cardNumberList.size() > 20){
+            while (true) {
+                end += end;
+                ArrayList<Integer> tempList = new ArrayList<>();
+                if (end > cardNumberList.size()) {
+                    end = cardNumberList.size();
+                }
+                for (int i = start; i < end; i++) {
+                    tempList.add(cardNumberList.get(i));
+                }
+                start = start + end;
+                System.out.println(tempList);
+                if (end >= cardNumberList.size()){
+                    break;
+                }
+            }
+        }
     }
 }

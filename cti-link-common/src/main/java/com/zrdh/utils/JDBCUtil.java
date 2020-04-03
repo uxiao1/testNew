@@ -8,9 +8,9 @@ import java.sql.*;
  */
 public class JDBCUtil {
     // 定义静态变量，使用静态代码获取配置文件的值
-    private static String url = "jdbc:mysql://218.206.209.50:13306/data-analyze?useUnicode=true&characterEncoding=UTF-8";
-    private static String user = "dataanalyze";
-    private static String password = "ctitech123";
+    private static String url = "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8";
+    private static String user = "root";
+    private static String password = "root";
     private static String driver = "com.mysql.jdbc.Driver";
     /*// 使用静态代码注册驱动并给静态变量赋值
     static{

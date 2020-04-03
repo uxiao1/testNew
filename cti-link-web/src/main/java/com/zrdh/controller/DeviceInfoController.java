@@ -10,10 +10,7 @@ import com.zrdh.service.DispatchService;
 import com.zrdh.service.TradeService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Description: cti-link-dataAnalysis
@@ -56,16 +53,25 @@ public class DeviceInfoController {
      */
     @GetMapping("/queryDeviceInfoCurve")
     public Result queryDeviceInfoCurve(@RequestParam(required = false) Long beginTime,@RequestParam(required = false) Long endTime){
+        if(beginTime == null){
+            beginTime = new Date().getTime() - 24*60*60*1000;
+        }
+        if(endTime == null){
+            endTime = new Date().getTime();
+        }
         Result result = new Result();
         try {
             result.setRstCode(0);
             HashMap<String, Object> data = new HashMap<>();
             //----------------------------一级设备查询----------------------------
-            //取定时任务存的表的数据
+            HashMap<String, ArrayList> firstEChatt = dataAnalyzeService.findFirstHeatNumAndTimeByBeginTime2EndTime(new Date(beginTime), new Date(endTime));
             //----------------------------二级设备查询-----------------------------
-
+            HashMap<String, ArrayList> secondEChart = dataAnalyzeService.findSecondHeatNumAndTimeByBeginTime2EndTime(new Date(beginTime), new Date(endTime));
             //--------------------------开封市实时温度----------------------------
-
+            String currentTemperature = deviceInfoService.getCurrentTemperature(new Date());
+            data.put("firstEChatt",firstEChatt);
+            data.put("secondEChart",secondEChart);
+            data.put("currentTemperature",currentTemperature);
             result.setRstData(data);
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,7 +97,7 @@ public class DeviceInfoController {
             result.setRstCode(0);
             //电厂(即一级)指定时间段内用量
             double dcHeatNum = dataAnalyzeService.findDCHeatNumByFirstLevelLeakage(beginTime, endTime);
-            //热力站和部分上级为电厂的贸易系统在指定时间段内的用量,定时任务表中已经计算了
+            //热力站和部分上级为电厂的贸易系统在指定时间段内的用量,从二级漏损汇总表中取数据
             double rlzHeatnum = dataAnalyzeService.findRLZHeatNumBySecondLevelLeakage(beginTime, endTime);
             HashMap<String, Object> resultMap = new HashMap<>();
             resultMap.put("firstDCHeatNum",dcHeatNum);
@@ -121,7 +127,13 @@ public class DeviceInfoController {
         try {
             result.setRstCode(0);
             //电厂(一级)漏损值和时间
-            dataAnalyzeService.findLeakageNumAndTimeByBeginTime2EndTime(new Date(beginTime),new Date(endTime));
+            HashMap<String, ArrayList> firstLeakageMap = dataAnalyzeService.findFirstLeakageNumAndTimeByBeginTime2EndTime(new Date(beginTime), new Date(endTime));
+            //热力站(二级)漏损值和时间
+            HashMap<String, ArrayList> secondLeakageMap = dataAnalyzeService.findSecondLeakageNumAndTimeByBeginTime2EndTime(new Date(beginTime), new Date(endTime));
+            HashMap<String, HashMap> resultMap = new HashMap<>();
+            resultMap.put("firstLeakageMap",firstLeakageMap);
+            resultMap.put("secondLeakageMap",secondLeakageMap);
+            result.setRstData(resultMap);
         } catch (Exception e) {
             e.printStackTrace();
             result.setRstCode(1);

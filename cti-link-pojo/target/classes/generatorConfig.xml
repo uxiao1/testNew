@@ -11,7 +11,7 @@
             <!--是否取消注销  -->
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://218.206.209.50:13306/data-analyze?characterEncoding=UTF-8" userId="dataanalyze" password="ctitech123">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8" userId="root" password="root">
         </jdbcConnection>
         <!-- 所生成的实体类的位置默认资源包src -->
         <javaModelGenerator targetPackage="com.zrdh.pojo.dataAnalyze" targetProject="src/main/java"></javaModelGenerator>
@@ -21,7 +21,7 @@
         <javaClientGenerator targetPackage="com.zrdh.dao.dataAnalyze" type="XMLMAPPER" targetProject="src/main/java"></javaClientGenerator>
 
         <!--为表生成代码tableName:表名,schema:不用填写  -->
-        <table tableName="traderelated" enableCountByExample="false" enableSelectByExample="false"
+        <table tableName="second_level_leakage_sum" enableCountByExample="false" enableSelectByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>

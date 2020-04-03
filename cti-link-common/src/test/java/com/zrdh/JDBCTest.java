@@ -27,6 +27,7 @@ public class JDBCTest {
         }
         Connection conn = null;
         conn = JDBCUtil.getConnection();
+        int count = 0;
         for (Map<String, String> paramMap : paramList) {
             try {
                 String name = paramMap.get("name");
@@ -36,7 +37,7 @@ public class JDBCTest {
                 } catch (Exception e) {
 
                 }
-                String sql = "INSERT INTO heatstation (name,hId) VALUES (?,?)";
+                String sql = "INSERT INTO plot (name,hId) VALUES (?,?)";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1,name);
                 if(id == null){
@@ -45,6 +46,7 @@ public class JDBCTest {
                     ps.setInt(2, id);
                 }
                 int i = ps.executeUpdate();
+                count++;
                 ps.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -52,13 +54,14 @@ public class JDBCTest {
 //                JDBCUtil.close(rs, stmt, conn);
             }
         }
+        System.out.println(count);
         conn.close();
     }
 
     @Test
     public void readPOI() throws Exception{
         // 判断文件是否存在
-        File file = new File("C:\\Users\\17645\\Desktop\\guanxi\\换热站ID对照表.xlsx");
+        File file = new File("C:\\Users\\17645\\Desktop\\guanxi\\小区ID对照表.xlsx");
         if (!file.exists()) {
             throw new IOException("文件名为" + file.getName() + "Excel文件不存在！");
         }

@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.zrdh.pojo.dataAnalyze.Cardnumberaddress;
 import com.zrdh.pojo.dataAnalyze.FirstLevelLeakage;
 import com.zrdh.pojo.dataAnalyze.SecondLevelLeakage;
+import com.zrdh.pojo.dataAnalyze.SecondLevelLeakageSum;
 import com.zrdh.pojo.dispatchCenterHistory.TbTagHdbTd;
 import com.zrdh.pojo.lorawanUser.HmNormaldecodedata;
 import com.zrdh.pojo.nbUser.VmAmeterRlgs;
@@ -56,7 +57,7 @@ public class AnalysisJob {
             //得到上级是电厂的贸易中心数据
             List<Devlasteststate> devlasteststateList = tradeService.query4DC();
             Double tradeHeatNumSum = 0.00;
-            if(devlasteststateList != null) {
+            if(!devlasteststateList.isEmpty()) {
                 for (Devlasteststate devlasteststate : devlasteststateList) {
                     tradeHeatNumSum += devlasteststate.getCurheatnum();
                 }
@@ -82,21 +83,29 @@ public class AnalysisJob {
         logger.debug("=====================================**********二级管网漏损分析***********====================================");
         //所有热力站最新数据
         List<TbTagHdbTd> rlzTags = dispatchService.selectRLZTag();
-        if(rlzTags != null) {
+        if(!rlzTags.isEmpty()) {
+            //实时温度
+            String currentTemperature = deviceInfoService.getCurrentTemperature(new Date());
+            SecondLevelLeakageSum secondLevelLeakageSum = new SecondLevelLeakageSum();
+            Double tagHeatNumSum = 0d;
+            Double hyHeatNumbSum = 0d;
+            Double leakageNumSum = 0d;
+            Double heatPowerSum = 0d;
+            Double wdcSum = 0d;
             for (TbTagHdbTd rlzTag : rlzTags) {
                 SecondLevelLeakage secondLevelLeakage = new SecondLevelLeakage();
                 secondLevelLeakage.setTagid(rlzTag.getTagid());
                 secondLevelLeakage.setTagcurheatnumer(rlzTag.getValue());
                 //拿到该热力站所对应的全部房卡号信息(全部系统的房卡号信息)
                 List<Cardnumberaddress> cardnumberaddresses = dataAnalyzeService.findCardNum4RlzTagId(rlzTag.getTagid());
-                if (cardnumberaddresses != null) {
+                if (!cardnumberaddresses.isEmpty()) {
                     logger.debug("------------------------------热力站tagId为" + rlzTag.getTagid() + "对应的全部房卡号信息:" + cardnumberaddresses.toString() + "-----------------------------");
                     //根据房卡信息拿到德尔系统对应的信息
                     List<VmAmeterRlgs> deers = deerService.queryDeer4CardNumber(cardnumberaddresses);
                     Double deerCurHeatNumber = 0.00;    //热力值
                     Double deerHeatPower = 0.00;        //功率
                     Double deerWdc = 0.00;              //温差
-                    if(deers != null) {
+                    if(!deers.isEmpty()) {
                         logger.debug("------------------------------该热力站德尔系统对应的数据:" + deers.toString() + "---------------------------------");
                         for (VmAmeterRlgs deer : deers) {
                             deerCurHeatNumber += deer.getDqrl();
@@ -110,7 +119,7 @@ public class AnalysisJob {
                     Double tradeCurHeatNumber = 0.00;
                     Double tradeHeatPower = 0.00;
                     Double tradeWdc = 0.00;
-                    if(devlasteststates != null) {
+                    if(!devlasteststates.isEmpty()) {
                         logger.debug("------------------------------该热力站贸易系统对应的数据:" + devlasteststates.toString() + "---------------------------------");
                         for (Devlasteststate devlasteststate : devlasteststates) {
                             tradeCurHeatNumber += devlasteststate.getCurheatnum();
@@ -124,7 +133,7 @@ public class AnalysisJob {
                     Double lorawanCurHeatNumber = 0.00;
                     Double lorawanHeatPower = 0.00;
                     Double lorawanWdc = 0.00;
-                    if(lorawans != null) {
+                    if(!lorawans.isEmpty()) {
                         logger.debug("------------------------------该热力站lorawan系统对应的数据:" + lorawans.toString() + "---------------------------------");
                         for (HmNormaldecodedata lorawan : lorawans) {
                             lorawanCurHeatNumber += lorawan.getCurrentheatnumber();
@@ -136,11 +145,16 @@ public class AnalysisJob {
                     Double hyCurHeatNumber = deerCurHeatNumber + lorawanCurHeatNumber + tradeCurHeatNumber;
                     Double hyHeatPower = deerHeatPower + lorawanHeatPower + tradeHeatPower;
                     Double hyWdc = deerWdc + lorawanWdc + tradeWdc;
+
+                    tagHeatNumSum += rlzTag.getValue();
+                    hyHeatNumbSum += hyCurHeatNumber;
+                    leakageNumSum += rlzTag.getValue() - hyCurHeatNumber;
+                    heatPowerSum += hyHeatPower;
+                    wdcSum += hyWdc;
+
                     secondLevelLeakage.setHycurheatnumber(hyCurHeatNumber);
                     secondLevelLeakage.setHyheatpower(hyHeatPower.floatValue());
                     secondLevelLeakage.setHywdc(hyWdc.floatValue());
-                    //实时温度
-                    String currentTemperature = deviceInfoService.getCurrentTemperature(new Date());
                     secondLevelLeakage.setTemperature(currentTemperature);
                     secondLevelLeakage.setCurrenttime(new Date());
                     secondLevelLeakage.setLeakagenumber(rlzTag.getValue() - hyCurHeatNumber);
@@ -148,6 +162,16 @@ public class AnalysisJob {
                     dataAnalyzeService.saveSecondLeaveLeakage(secondLevelLeakage);
                 }
             }
+            secondLevelLeakageSum.setCurrenttime(new Date());
+            secondLevelLeakageSum.setHycurheatnumbersum(hyHeatNumbSum);
+            secondLevelLeakageSum.setHyheatpowersum(heatPowerSum.floatValue());
+            secondLevelLeakageSum.setHywdcsum(wdcSum.floatValue());
+            secondLevelLeakageSum.setLeakagenumbersum(leakageNumSum);
+            secondLevelLeakageSum.setTemperature(currentTemperature);
+            secondLevelLeakageSum.setTagcurheatnumersum(tagHeatNumSum);
+            //统计存入汇总表
+            dataAnalyzeService.saveSecondLeaveLeakageSum(secondLevelLeakageSum);
+            logger.debug("=====================================**********二级管网漏损分析汇总结果"+secondLevelLeakageSum.toString()+"***********====================================");
         }
     }
 }

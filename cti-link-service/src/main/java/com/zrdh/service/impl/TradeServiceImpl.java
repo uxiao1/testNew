@@ -12,7 +12,6 @@ import com.zrdh.pojo.tradeSettlement.Devlasteststate;
 import com.zrdh.service.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class TradeServiceImpl implements TradeService {
             return null;
         }
         ArrayList<String> meterNoList = new ArrayList<>();
-        if(traderelateds != null){
+        if(!traderelateds.isEmpty()){
             for (Traderelated traderelated : traderelateds) {
                 String meterid = traderelated.getMeterid();
                 meterNoList.add(meterid);
@@ -52,6 +51,30 @@ public class TradeServiceImpl implements TradeService {
         }
         if(meterNoList.isEmpty()){
             return null;
+        }
+        if (meterNoList.size() > 2000){
+            int start = 0;
+            int end = 1000;
+            List<Devlasteststate> devlasteststateList = new ArrayList<>();
+            while (true) {
+                end += end;
+                ArrayList<String> tempList = new ArrayList<>();
+                if (end > meterNoList.size()) {
+                    end = meterNoList.size();
+                }
+                for (int i = start; i < end; i++) {
+                    tempList.add(meterNoList.get(i));
+                }
+                start = start + end;
+                if(!tempList.isEmpty()) {
+                    List<Devlasteststate> tempResult = devlasteststateMapper.selectByMeterNos(tempList);
+                    devlasteststateList.addAll(tempResult);
+                }
+                if (end >= meterNoList.size()){
+                    break;
+                }
+            }
+            return devlasteststateList;
         }
         List<Devlasteststate> devlasteststateList = devlasteststateMapper.selectByMeterNos(meterNoList);
         return devlasteststateList;
@@ -73,6 +96,30 @@ public class TradeServiceImpl implements TradeService {
         }
         if(meterNoList.isEmpty()){
             return null;
+        }
+        if (meterNoList.size() > 2000){
+            int start = 0;
+            int end = 1000;
+            ArrayList<Devlasteststate> devlasteststateList = new ArrayList<>();
+            while (true) {
+                end += end;
+                ArrayList<String> tempList = new ArrayList<>();
+                if (end > meterNoList.size()) {
+                    end = meterNoList.size();
+                }
+                for (int i = start; i < end; i++) {
+                    tempList.add(meterNoList.get(i));
+                }
+                start = start + end;
+                if(!tempList.isEmpty()) {
+                    ArrayList<Devlasteststate> tempResult = devlasteststateMapper.selectByMeterNos(tempList);
+                    devlasteststateList.addAll(tempResult);
+                }
+                if (end >= meterNoList.size()){
+                    break;
+                }
+            }
+            return devlasteststateList;
         }
         ArrayList<Devlasteststate> devlasteststateList = devlasteststateMapper.selectByMeterNos(meterNoList);
         return devlasteststateList;

@@ -1,8 +1,11 @@
 package com.zrdh.dao.dataAnalyze;
 
 import com.zrdh.pojo.dataAnalyze.FirstLevelLeakage;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
+import java.util.List;
 
 public interface FirstLevelLeakageMapper {
     int deleteByPrimaryKey(Integer id);
@@ -22,5 +25,15 @@ public interface FirstLevelLeakageMapper {
      * @param dateTime
      * @return
      */
-    FirstLevelLeakage selectByNearTime(Date dateTime);
+    @Select("select * from first_level_leakage where currentTime <= #{dateTime} order by currentTime desc LIMIT 1")
+    FirstLevelLeakage selectByNearTime(@Param("dateTime") Date dateTime);
+
+    /**
+     * 查询在指定时间内的所有数据
+     * @param begin
+     * @param end
+     * @return
+     */
+    @Select("select * from first_level_leakage where currentTime BETWEEN #{begin} and #{end}")
+    List<FirstLevelLeakage> selectBetweenBeginAndEnd(@Param("begin") Date begin,@Param("end") Date end);
 }

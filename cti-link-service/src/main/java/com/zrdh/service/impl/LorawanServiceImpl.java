@@ -36,6 +36,30 @@ public class LorawanServiceImpl implements LorawanService {
         if(cardNumberList.isEmpty()){
             return null;
         }
+        if (cardNumberList.size() > 2000){
+            int start = 0;
+            int end = 1000;
+            List<HmNormaldecodedata> hmNormaldecodedata = new ArrayList<>();
+            while (true) {
+                end += end;
+                ArrayList<String> tempList = new ArrayList<>();
+                if (end > cardNumberList.size()) {
+                    end = cardNumberList.size();
+                }
+                for (int i = start; i < end; i++) {
+                    tempList.add(cardNumberList.get(i));
+                }
+                start = start + end;
+                if(!tempList.isEmpty()) {
+                    List<HmNormaldecodedata> tempResult = hmNormaldecodedataMapper.selectByHouseCard(tempList,partition);
+                    hmNormaldecodedata.addAll(tempResult);
+                }
+                if (end >= cardNumberList.size()){
+                    break;
+                }
+            }
+            return hmNormaldecodedata;
+        }
         List<HmNormaldecodedata> hmNormaldecodedata = hmNormaldecodedataMapper.selectByHouseCard(cardNumberList,partition);
         return hmNormaldecodedata;
     }

@@ -3,8 +3,11 @@ package com.zrdh.service;
 import com.zrdh.pojo.dataAnalyze.Cardnumberaddress;
 import com.zrdh.pojo.dataAnalyze.FirstLevelLeakage;
 import com.zrdh.pojo.dataAnalyze.SecondLevelLeakage;
+import com.zrdh.pojo.dataAnalyze.SecondLevelLeakageSum;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -47,6 +50,33 @@ public interface DataAnalyzeService {
      * 查询时间段内一级(电厂)漏损值和对应的时间
      * @param begin
      * @param end
+     * @return  leakageNumList  漏损值     timeList  漏损值对应的时间
      */
-    void findLeakageNumAndTimeByBeginTime2EndTime(Date begin, Date end);
+    HashMap<String, ArrayList> findFirstLeakageNumAndTimeByBeginTime2EndTime(Date begin, Date end);
+
+    /**
+     * 查询时间段内二级(热力站,贸易)漏损值和对应的时间
+     * @param begin
+     * @param end
+     * @return
+     */
+    HashMap<String, ArrayList> findSecondLeakageNumAndTimeByBeginTime2EndTime(Date begin, Date end);
+
+    /**
+     * 查询时间段内一级(电厂)用量和对应时间
+     * @param begin
+     * @param end
+     * @return
+     */
+    HashMap<String, ArrayList> findFirstHeatNumAndTimeByBeginTime2EndTime(Date begin, Date end);
+
+    /**
+     * 查询时间段内二级(热力站,贸易)用量,功率,温差和对应时间
+     * @param begin
+     * @param end
+     * @return
+     */
+    HashMap<String, ArrayList> findSecondHeatNumAndTimeByBeginTime2EndTime(Date begin, Date end);
+
+    void saveSecondLeaveLeakageSum(SecondLevelLeakageSum secondLevelLeakageSum);
 }

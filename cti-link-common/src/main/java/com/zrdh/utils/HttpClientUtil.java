@@ -96,7 +96,7 @@ public class HttpClientUtil {
 
     public static String parsePamars(Map<String ,Object> map) {
         String data = "";
-        if (map != null) {
+        if (!map.isEmpty()) {
             Set<String> set = map.keySet();//遍历map中的健，找到对应的值
             for (String key : set) {
                 String value = map.get(key).toString();//取得值

@@ -34,7 +34,33 @@ public class DeerServiceImpl implements DeerService {
         if(cardNumberList.isEmpty()){
             return null;
         }
-        List<VmAmeterRlgs> vmAmeterRlgs = vmAmeterRlgsMapper.selectBySfbm(cardNumberList);
-        return vmAmeterRlgs;
+        // in(param)最大不能超过2000左右
+        if (cardNumberList.size() > 2000){
+            int start = 0;
+            int end = 1000;
+            List<VmAmeterRlgs> vmAmeterRlgsList = new ArrayList<>();
+            while (true) {
+                end += end;
+                ArrayList<Integer> tempList = new ArrayList<>();
+                if (end > cardNumberList.size()) {
+                    end = cardNumberList.size();
+                }
+                for (int i = start; i < end; i++) {
+                    tempList.add(cardNumberList.get(i));
+                }
+                start = start + end;
+                if(!tempList.isEmpty()) {
+                    List<VmAmeterRlgs> tempResult = vmAmeterRlgsMapper.selectBySfbm(tempList);
+                    vmAmeterRlgsList.addAll(tempResult);
+                }
+                if (end >= cardNumberList.size()){
+                    break;
+                }
+            }
+            return vmAmeterRlgsList;
+        }else {
+            List<VmAmeterRlgs> vmAmeterRlgs = vmAmeterRlgsMapper.selectBySfbm(cardNumberList);
+            return vmAmeterRlgs;
+        }
     }
 }
