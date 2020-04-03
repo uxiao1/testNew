@@ -2,6 +2,8 @@ package com.zrdh.dao.dataAnalyze;
 
 import com.zrdh.pojo.dataAnalyze.FirstLevelLeakage;
 
+import java.util.Date;
+
 public interface FirstLevelLeakageMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,11 @@ public interface FirstLevelLeakageMapper {
     int updateByPrimaryKeySelective(FirstLevelLeakage record);
 
     int updateByPrimaryKey(FirstLevelLeakage record);
+
+    /**
+     * 查询离指定时间最近的一条数据
+     * @param dateTime
+     * @return
+     */
+    FirstLevelLeakage selectByNearTime(Date dateTime);
 }

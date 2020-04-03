@@ -8,9 +8,9 @@ public class FirstLevelLeakage implements Serializable {
 
     private Integer dcid;
 
-    private Double dccurheatnumer;
+    private Double dccurheatnumer;  //电厂热力值
 
-    private Double rlzcurheatnumber;
+    private Double rlzcurheatnumber;    //电厂对应的热力站以及电厂对应所有的贸易结算系统的热力值
 
     private Double leakagenumber;
 

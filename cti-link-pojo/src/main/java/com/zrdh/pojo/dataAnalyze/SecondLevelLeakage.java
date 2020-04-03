@@ -8,9 +8,9 @@ public class SecondLevelLeakage implements Serializable {
 
     private Integer tagid;
 
-    private Double tagcurheatnumer;
+    private Double tagcurheatnumer;     //热力站热力值
 
-    private Double hycurheatnumber;
+    private Double hycurheatnumber;     //热力站对应的户用表的热力值
 
     private Double leakagenumber;
 

@@ -28,15 +28,15 @@ public class LorawanServiceImpl implements LorawanService {
             return null;
         }
         String partition = LorawanPartition.getPartitionByDate(new Date());
-        ArrayList<HmNormaldecodedata> lorawanList = new ArrayList<>();
+        ArrayList<String> cardNumberList = new ArrayList<>();
         for (Cardnumberaddress cardnumberaddress : cardnumberaddresses) {
             String cardnum = cardnumberaddress.getcCardnum();
-            int cardNumber = Integer.parseInt(cardnum);
-            HmNormaldecodedata hmNormaldecodedata = hmNormaldecodedataMapper.selectByHouseCard(cardNumber,partition);
-            if(hmNormaldecodedata != null){
-                lorawanList.add(hmNormaldecodedata);
-            }
+            cardNumberList.add(cardnum);
         }
-        return lorawanList;
+        if(cardNumberList.isEmpty()){
+            return null;
+        }
+        List<HmNormaldecodedata> hmNormaldecodedata = hmNormaldecodedataMapper.selectByHouseCard(cardNumberList,partition);
+        return hmNormaldecodedata;
     }
 }

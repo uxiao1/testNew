@@ -23,10 +23,11 @@ public interface TagsMapper {
 
     /**
      * 查询所有热力站信息
+     *  需要排除部分不是热力站的数据
      * @return
+     * @param notBelongRlzId TagsExcludeConstant.notBelongRlzId  排除部分不是热力站的数据id
      */
-    @Select("SELECT * FROM `tags` where TagComment = '累积热量'")
-    List<Tags> selectRLZInfos();
+    List<Tags> selectRLZInfos(@Param("notBelongRlzId") int[] notBelongRlzId);
 
     @Select("select * from tags where id = #{tagid}")
     Tags selectByTagId(@Param("tagid") Integer tagid);

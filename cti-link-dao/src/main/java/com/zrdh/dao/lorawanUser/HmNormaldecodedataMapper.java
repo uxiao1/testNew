@@ -27,5 +27,7 @@ public interface HmNormaldecodedataMapper {
      */
     List<HmNormaldecodedata> selectByAlarmConditions(AlarmConditions alarmConditions);
 
-    HmNormaldecodedata selectByHouseCard(@Param("cardNumber") int cardNumber,@Param("partition") String partition);
+    List<HmNormaldecodedata> selectByHouseCard(@Param("cardNumber") List<String> cardNumber, @Param("partition") String partition);
+
+
 }

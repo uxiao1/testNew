@@ -91,4 +91,29 @@
     where Id = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="selectByTagId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select t.* from tb_tag_hdb_td t,(select TagId,max(DBTime) as DBTime from tb_tag_hdb_td GROUP BY TagId) d where t.TagId = d.TagId and t.DBTime = d.DBTime and t.TagId = #{dcId}
+  </select>
+
+  <select id="selectByTagIds" parameterType="java.util.List" resultMap="BaseResultMap">
+    select t.* from tb_tag_hdb_td t,(select TagId,max(DBTime) as DBTime from tb_tag_hdb_td GROUP BY TagId) d where t.TagId = d.TagId and t.DBTime = d.DBTime and t.TagId in
+    <foreach collection="ids" open="(" close=")" separator="," item="item">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </select>
+
+  <select id="findHistoryByTagId" resultMap="BaseResultMap">
+    select * from #{tableName} where DBTime &lt;= #{date} and TagId = #{tagId} ORDER BY DBTime desc LIMIT 1
+  </select>
+
+  <select id="findHistoryByTagIds" resultMap="BaseResultMap">
+    SELECT b.* from #{tableName} b ,
+    (select TagId,max(DBTime) as DBTime from #{tableName} where DBTime &lt;= #{date} and TagId in
+    <foreach collection="tagsIds" open="(" close=")" separator="," item="item">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+     GROUP BY TagId) max
+    where
+    b.TagId = max.TagId and b.DBTime = max.DBTime
+  </select>
 </mapper>

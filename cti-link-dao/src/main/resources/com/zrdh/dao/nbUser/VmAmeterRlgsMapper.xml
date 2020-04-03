@@ -59,4 +59,11 @@
             </if>
         </where>
     </select>
+
+    <select id="selectBySfbm" resultMap="BaseResultMap">
+        select * from Vw_ameter_data_to_rlgs where sfbm in
+        <foreach collection="cardNumber" open="(" close=")" separator="," item="item">
+            #{item,jdbcType=INTEGER}
+        </foreach>
+    </select>
 </mapper>

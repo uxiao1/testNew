@@ -25,15 +25,16 @@ public class DeerServiceImpl implements DeerService {
         if(cardnumberaddresses == null){
             return null;
         }
-        ArrayList<VmAmeterRlgs> deerList = new ArrayList<>();
+        ArrayList<Integer> cardNumberList = new ArrayList<>();
         for (Cardnumberaddress cardnumberaddress : cardnumberaddresses) {
             String cardnum = cardnumberaddress.getcCardnum();
             int cardNumber = Integer.parseInt(cardnum);
-            VmAmeterRlgs vmAmeterRlgs = vmAmeterRlgsMapper.selectBySfbm(cardNumber);
-            if(vmAmeterRlgs != null){
-                deerList.add(vmAmeterRlgs);
-            }
+            cardNumberList.add(cardNumber);
         }
-        return deerList;
+        if(cardNumberList.isEmpty()){
+            return null;
+        }
+        List<VmAmeterRlgs> vmAmeterRlgs = vmAmeterRlgsMapper.selectBySfbm(cardNumberList);
+        return vmAmeterRlgs;
     }
 }

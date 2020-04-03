@@ -150,4 +150,15 @@
       I_BuildingID = #{iBuildingid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByBoroughName" parameterType="string" resultMap="BaseResultMap">
+    select * from cardnumberaddress where C_BoroughName = #{name}
+  </select>
+
+  <select id="selectByBoroughNames" parameterType="java.util.List" resultMap="BaseResultMap">
+    select * from cardnumberaddress where C_BoroughName in
+    <foreach collection="boroughNames" open="(" close=")" separator="," item="item">
+      #{item,jdbcType=VARCHAR}
+    </foreach>
+  </select>
 </mapper>

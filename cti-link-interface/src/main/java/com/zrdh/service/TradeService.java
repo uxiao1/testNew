@@ -25,4 +25,5 @@ public interface TradeService {
      * @return
      */
     ArrayList<Devlasteststate> query4RLZInfos(Integer tagid);
+
 }

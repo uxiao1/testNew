@@ -4,6 +4,7 @@ import com.zrdh.pojo.dataAnalyze.Cardnumberaddress;
 import com.zrdh.pojo.dataAnalyze.FirstLevelLeakage;
 import com.zrdh.pojo.dataAnalyze.SecondLevelLeakage;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,4 +26,27 @@ public interface DataAnalyzeService {
     List<Cardnumberaddress> findCardNum4RlzTagId(Integer tagid);
 
     void saveSecondLeaveLeakage(SecondLevelLeakage secondLevelLeakage);
+
+    /**
+     * 查询电厂在定时任务表中指定时间内用量
+     * @param beginTime
+     * @param endTime
+     * @return
+     */
+    double findDCHeatNumByFirstLevelLeakage(Long beginTime, Long endTime);
+
+    /**
+     * 查询热力站以及上级为电厂的贸易结算系统在任务表中指定时间内用量
+     * @param beginTime
+     * @param endTime
+     * @return
+     */
+    double findRLZHeatNumBySecondLevelLeakage(Long beginTime, Long endTime);
+
+    /**
+     * 查询时间段内一级(电厂)漏损值和对应的时间
+     * @param begin
+     * @param end
+     */
+    void findLeakageNumAndTimeByBeginTime2EndTime(Date begin, Date end);
 }

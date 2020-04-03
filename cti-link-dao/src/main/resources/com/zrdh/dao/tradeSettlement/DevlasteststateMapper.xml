@@ -178,4 +178,11 @@
       </if>
     </where>
   </select>
+
+  <select id="selectByMeterNos" parameterType="java.util.List" resultMap="BaseResultMap">
+    SELECT * FROM `newestdata` where DtuId in
+    <foreach collection="meterNoList" open="(" close=")" separator="," item="item">
+      #{item,jdbcType=VARCHAR}
+    </foreach>
+  </select>
 </mapper>

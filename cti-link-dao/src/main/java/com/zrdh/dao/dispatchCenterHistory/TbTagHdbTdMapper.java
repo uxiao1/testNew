@@ -2,8 +2,9 @@ package com.zrdh.dao.dispatchCenterHistory;
 
 import com.zrdh.pojo.dispatchCenterHistory.TbTagHdbTd;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,8 +26,30 @@ public interface TbTagHdbTdMapper {
     /**
      * 根据tagId查询
      * @param dcId
+     * @return  取出tagId对应的最新的数据
+     */
+    TbTagHdbTd selectByTagId(@Param("dcId") Integer dcId);
+
+    /**
+     * 根据tagIds取出最新的一条数据
+     * @param ids
+     * @return  每个tagsId只返回一条最新的
+     */
+    List<TbTagHdbTd> selectByTagIds(@Param("ids") List<Integer> ids);
+
+    /**
+     * 根据tagId查找在指定时间的数据
+     * @param tagId
+     * @param tableName  表名 ----因为是拆表的
      * @return
      */
-    @Select("SELECT * FROM `tb_tag_hdb_td` where TagId = #{dcId}")
-    List<TbTagHdbTd> selectByTagId(@Param("dcId") Integer dcId);
+    TbTagHdbTd findHistoryByTagId(@Param("tagId") Integer tagId,@Param("tableName") String tableName,@Param("date") Date date);
+
+    /**
+     * 根据tagId查找在指定时间的数据
+     * @param tagsIds   tagId的集合
+     * @param tableName  表名 ----因为是拆表的
+     * @return
+     */
+    List<TbTagHdbTd> findHistoryByTagIds(@Param("tagsIds")ArrayList<Integer> tagsIds,@Param("tableName") String tableName,@Param("date") Long beginTime);
 }

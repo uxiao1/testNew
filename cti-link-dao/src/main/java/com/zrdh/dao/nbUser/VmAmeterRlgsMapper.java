@@ -5,6 +5,7 @@ import com.zrdh.pojo.nbUser.VmAmeterRlgs;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,5 @@ public interface VmAmeterRlgsMapper {
      */
     List<VmAmeterRlgs> selectByAlarmConditions(AlarmConditions alarmConditions);
 
-    @Select("select * from Vw_ameter_data_to_rlgs where sfbm = #{cardNumber}")
-    VmAmeterRlgs selectBySfbm(@Param("cardNumber") int cardNumber);
+    List<VmAmeterRlgs> selectBySfbm(@Param("cardNumber") ArrayList<Integer> cardNumber);
 }

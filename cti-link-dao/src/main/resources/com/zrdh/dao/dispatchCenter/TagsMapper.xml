@@ -44,4 +44,12 @@
       </if>
     </trim>
   </insert>
+
+
+  <select id="selectRLZInfos" resultMap="BaseResultMap">
+    SELECT * FROM `tags` where TagComment = '累积热量' and id not in
+    <foreach collection="notBelongRlzId" open="(" close=")" separator="," item="item">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </select>
 </mapper>

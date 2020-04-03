@@ -6,6 +6,7 @@ import com.zrdh.pojo.tradeSettlement.DevlasteststateKey;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface DevlasteststateMapper {
@@ -35,4 +36,6 @@ public interface DevlasteststateMapper {
      */
     @Select("SELECT * FROM `newestdata` where DtuId = #{meterid}")
     Devlasteststate selectByMeterNo(@Param("meterid") String meterid);
+
+    ArrayList<Devlasteststate> selectByMeterNos(@Param("meterNoList") List<String> meterNoList);
 }

@@ -12,6 +12,7 @@ import com.zrdh.pojo.tradeSettlement.Devlasteststate;
 import com.zrdh.service.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,33 +36,46 @@ public class TradeServiceImpl implements TradeService {
     public List<Devlasteststate> query4DC() {
         Tags tags = tagsMapper.selectDcInfo();
         Heatstation heatstation = heatstationMapper.selectByName(tags.getDevname());
+        if(heatstation == null) {
+            return null;
+        }
         List<Traderelated> traderelateds = traderelatedMapper.selectByHid(heatstation.getHid());
-        ArrayList<Devlasteststate> resultList = new ArrayList<>();
+        if(traderelateds == null) {
+            return null;
+        }
+        ArrayList<String> meterNoList = new ArrayList<>();
         if(traderelateds != null){
             for (Traderelated traderelated : traderelateds) {
                 String meterid = traderelated.getMeterid();
-                Devlasteststate devlasteststate = devlasteststateMapper.selectByMeterNo(meterid);
-                resultList.add(devlasteststate);
+                meterNoList.add(meterid);
             }
         }
-        return resultList;
+        if(meterNoList.isEmpty()){
+            return null;
+        }
+        List<Devlasteststate> devlasteststateList = devlasteststateMapper.selectByMeterNos(meterNoList);
+        return devlasteststateList;
     }
 
     @Override
     public ArrayList<Devlasteststate> query4RLZInfos(Integer tagid) {
         Tags tags = tagsMapper.selectByTagId(tagid);
-        ArrayList<Devlasteststate> resultList = new ArrayList<>();
         String devname = tags.getDevname();
         //根据热力站名称去heatstation表中拿到hid
         Heatstation heatstation = heatstationMapper.selectByName(devname);
         //然后再去tradereleate表中取出相关的贸易系统信息
         List<Traderelated> traderelateds = traderelatedMapper.selectByHid(heatstation.getHid());
         //再冲tradereleate表取出meterNo去贸易结构系统视图中查找
+        ArrayList<String> meterNoList = new ArrayList<>();
         for (Traderelated traderelated : traderelateds) {
-            Devlasteststate devlasteststate = devlasteststateMapper.selectByMeterNo(traderelated.getMeterid());
-            resultList.add(devlasteststate);
+            String meterNo = traderelated.getMeterid();
+            meterNoList.add(meterNo);
         }
-        return resultList;
+        if(meterNoList.isEmpty()){
+            return null;
+        }
+        ArrayList<Devlasteststate> devlasteststateList = devlasteststateMapper.selectByMeterNos(meterNoList);
+        return devlasteststateList;
     }
 
 

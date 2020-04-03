@@ -391,6 +391,10 @@
             AND hm.MeterNo = maxTime.MeterNo
     ) m
     where USER.meterNo = m.MeterNo
-	AND USER.housecard = #{cardNumber}
+	AND USER.housecard in
+    <foreach collection="cardNumber" open="(" close=")" separator="," item="item">
+      #{item,jdbcType=VARCHAR}
+    </foreach>
   </select>
+
 </mapper>
