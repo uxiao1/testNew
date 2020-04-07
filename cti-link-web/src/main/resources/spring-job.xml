@@ -43,7 +43,8 @@
         <property name="jobDetail" ref="SecondLeaveJobDetail"></property>
         <!--指定触发的时间,给予cron表达式-->
         <property name="cronExpression">
-            <value>0 0/5 * * * ?</value>
+            <value>0 0 0/2 * * ?</value>
+<!--            <value>0 0,45 12 * * ?</value>-->
 <!--            <value>0 0 0,12 * * ? *</value>-->
         </property>
     </bean>

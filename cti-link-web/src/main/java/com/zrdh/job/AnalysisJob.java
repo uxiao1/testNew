@@ -108,9 +108,9 @@ public class AnalysisJob {
                     if(deers != null && !deers.isEmpty()) {
                         logger.debug("------------------------------该热力站德尔系统对应的数据:" + deers.toString() + "---------------------------------");
                         for (VmAmeterRlgs deer : deers) {
-                            deerCurHeatNumber += deer.getDqrl();
-                            deerHeatPower += deer.getGl();
-                            deerWdc += deer.getWdc();
+                            deerCurHeatNumber += (deer.getDqrl() == null) ? 0 : deer.getDqrl();
+                            deerHeatPower += (deer.getGl() == null) ? 0 : deer.getGl();
+                            deerWdc += (deer.getWdc() == null) ? 0 : deer.getWdc();
                         }
                     }
 
@@ -122,9 +122,9 @@ public class AnalysisJob {
                     if(devlasteststates != null && !devlasteststates.isEmpty()) {
                         logger.debug("------------------------------该热力站贸易系统对应的数据:" + devlasteststates.toString() + "---------------------------------");
                         for (Devlasteststate devlasteststate : devlasteststates) {
-                            tradeCurHeatNumber += devlasteststate.getCurheatnum();
-                            tradeHeatPower += devlasteststate.getHeatpower();
-                            tradeWdc += devlasteststate.getSupplywatertmp() - devlasteststate.getReturnwatertmp();
+                            tradeCurHeatNumber += (devlasteststate.getCurheatnum() == null) ? 0 : devlasteststate.getCurheatnum();
+                            tradeHeatPower += (devlasteststate.getHeatpower() == null) ? 0 :devlasteststate.getHeatpower();
+                            tradeWdc += ((devlasteststate.getSupplywatertmp() == null) ? 0 : devlasteststate.getSupplywatertmp()) - ((devlasteststate.getReturnwatertmp() == null) ? 0 : devlasteststate.getReturnwatertmp());
                         }
                     }
 
@@ -136,9 +136,9 @@ public class AnalysisJob {
                     if(lorawans != null && !lorawans.isEmpty()) {
                         logger.debug("------------------------------该热力站lorawan系统对应的数据:" + lorawans.toString() + "---------------------------------");
                         for (HmNormaldecodedata lorawan : lorawans) {
-                            lorawanCurHeatNumber += lorawan.getCurrentheatnumber();
-                            lorawanHeatPower += lorawan.getHeatpower();
-                            lorawanWdc += lorawan.getWdc();
+                            lorawanCurHeatNumber += (lorawan.getCurrentheatnumber() == null) ? 0 : lorawan.getCurrentheatnumber();
+                            lorawanHeatPower += (lorawan.getHeatpower() == null) ? 0 : lorawan.getHeatpower();
+                            lorawanWdc += (lorawan.getWdc() == null) ? 0 : lorawan.getWdc();
                         }
                     }
                     //热力站对应的三大系统的总热力值
