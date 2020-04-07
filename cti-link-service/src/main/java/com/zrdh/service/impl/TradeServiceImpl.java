@@ -43,13 +43,13 @@ public class TradeServiceImpl implements TradeService {
             return null;
         }
         ArrayList<String> meterNoList = new ArrayList<>();
-        if(!traderelateds.isEmpty()){
+        if(traderelateds != null && !traderelateds.isEmpty()){
             for (Traderelated traderelated : traderelateds) {
                 String meterid = traderelated.getMeterid();
                 meterNoList.add(meterid);
             }
         }
-        if(meterNoList.isEmpty()){
+        if(meterNoList == null || meterNoList.isEmpty()){
             return null;
         }
         if (meterNoList.size() > 2000){
@@ -66,7 +66,7 @@ public class TradeServiceImpl implements TradeService {
                     tempList.add(meterNoList.get(i));
                 }
                 start = start + end;
-                if(!tempList.isEmpty()) {
+                if(tempList != null && !tempList.isEmpty()) {
                     List<Devlasteststate> tempResult = devlasteststateMapper.selectByMeterNos(tempList);
                     devlasteststateList.addAll(tempResult);
                 }
@@ -94,7 +94,7 @@ public class TradeServiceImpl implements TradeService {
             String meterNo = traderelated.getMeterid();
             meterNoList.add(meterNo);
         }
-        if(meterNoList.isEmpty()){
+        if(meterNoList == null || meterNoList.isEmpty()){
             return null;
         }
         if (meterNoList.size() > 2000){
@@ -111,7 +111,7 @@ public class TradeServiceImpl implements TradeService {
                     tempList.add(meterNoList.get(i));
                 }
                 start = start + end;
-                if(!tempList.isEmpty()) {
+                if(tempList != null && !tempList.isEmpty()) {
                     ArrayList<Devlasteststate> tempResult = devlasteststateMapper.selectByMeterNos(tempList);
                     devlasteststateList.addAll(tempResult);
                 }

@@ -31,7 +31,7 @@ public class DeerServiceImpl implements DeerService {
             int cardNumber = Integer.parseInt(cardnum);
             cardNumberList.add(cardNumber);
         }
-        if(cardNumberList.isEmpty()){
+        if(cardNumberList == null || cardNumberList.isEmpty()){
             return null;
         }
         // in(param)最大不能超过2000左右
@@ -49,7 +49,7 @@ public class DeerServiceImpl implements DeerService {
                     tempList.add(cardNumberList.get(i));
                 }
                 start = start + end;
-                if(!tempList.isEmpty()) {
+                if(tempList != null && !tempList.isEmpty()) {
                     List<VmAmeterRlgs> tempResult = vmAmeterRlgsMapper.selectBySfbm(tempList);
                     vmAmeterRlgsList.addAll(tempResult);
                 }

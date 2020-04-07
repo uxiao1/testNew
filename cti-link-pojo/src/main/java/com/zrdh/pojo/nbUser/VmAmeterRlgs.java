@@ -15,7 +15,7 @@ public class VmAmeterRlgs implements Serializable {
     private String meter_no;         //仪表号
     private String meter_no_cb;       //德尔采集器的仪表号
     private Date cjq_time;           //抄表时间点 (根据此时间得到最近一条热表数据)
-    private Date cjqcjTime;         //热量表真实上报数据时间点
+    private String cjqcjTime;         //热量表真实上报数据时间点
     private Float dqrl;             //热量表累计热量
     private Float ljll;             //热量表累计流量
     private Float gl;               //热量表功率
@@ -80,11 +80,11 @@ public class VmAmeterRlgs implements Serializable {
         this.cjq_time = cjq_time;
     }
 
-    public Date getCjqcjTime() {
+    public String getCjqcjTime() {
         return cjqcjTime;
     }
 
-    public void setCjqcjTime(Date cjqcjTime) {
+    public void setCjqcjTime(String cjqcjTime) {
         this.cjqcjTime = cjqcjTime;
     }
 

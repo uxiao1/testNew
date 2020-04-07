@@ -33,7 +33,7 @@ public class LorawanServiceImpl implements LorawanService {
             String cardnum = cardnumberaddress.getcCardnum();
             cardNumberList.add(cardnum);
         }
-        if(cardNumberList.isEmpty()){
+        if(cardNumberList == null || cardNumberList.isEmpty()){
             return null;
         }
         if (cardNumberList.size() > 2000){
@@ -50,7 +50,7 @@ public class LorawanServiceImpl implements LorawanService {
                     tempList.add(cardNumberList.get(i));
                 }
                 start = start + end;
-                if(!tempList.isEmpty()) {
+                if(tempList != null && !tempList.isEmpty()) {
                     List<HmNormaldecodedata> tempResult = hmNormaldecodedataMapper.selectByHouseCard(tempList,partition);
                     hmNormaldecodedata.addAll(tempResult);
                 }

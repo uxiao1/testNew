@@ -57,7 +57,7 @@ public class AnalysisJob {
             //得到上级是电厂的贸易中心数据
             List<Devlasteststate> devlasteststateList = tradeService.query4DC();
             Double tradeHeatNumSum = 0.00;
-            if(!devlasteststateList.isEmpty()) {
+            if(devlasteststateList != null && !devlasteststateList.isEmpty()) {
                 for (Devlasteststate devlasteststate : devlasteststateList) {
                     tradeHeatNumSum += devlasteststate.getCurheatnum();
                 }
@@ -83,7 +83,7 @@ public class AnalysisJob {
         logger.debug("=====================================**********二级管网漏损分析***********====================================");
         //所有热力站最新数据
         List<TbTagHdbTd> rlzTags = dispatchService.selectRLZTag();
-        if(!rlzTags.isEmpty()) {
+        if(rlzTags != null && !rlzTags.isEmpty()) {
             //实时温度
             String currentTemperature = deviceInfoService.getCurrentTemperature(new Date());
             SecondLevelLeakageSum secondLevelLeakageSum = new SecondLevelLeakageSum();
@@ -98,14 +98,14 @@ public class AnalysisJob {
                 secondLevelLeakage.setTagcurheatnumer(rlzTag.getValue());
                 //拿到该热力站所对应的全部房卡号信息(全部系统的房卡号信息)
                 List<Cardnumberaddress> cardnumberaddresses = dataAnalyzeService.findCardNum4RlzTagId(rlzTag.getTagid());
-                if (!cardnumberaddresses.isEmpty()) {
+                if (cardnumberaddresses != null && !cardnumberaddresses.isEmpty()) {
                     logger.debug("------------------------------热力站tagId为" + rlzTag.getTagid() + "对应的全部房卡号信息:" + cardnumberaddresses.toString() + "-----------------------------");
                     //根据房卡信息拿到德尔系统对应的信息
                     List<VmAmeterRlgs> deers = deerService.queryDeer4CardNumber(cardnumberaddresses);
                     Double deerCurHeatNumber = 0.00;    //热力值
                     Double deerHeatPower = 0.00;        //功率
                     Double deerWdc = 0.00;              //温差
-                    if(!deers.isEmpty()) {
+                    if(deers != null && !deers.isEmpty()) {
                         logger.debug("------------------------------该热力站德尔系统对应的数据:" + deers.toString() + "---------------------------------");
                         for (VmAmeterRlgs deer : deers) {
                             deerCurHeatNumber += deer.getDqrl();
@@ -119,7 +119,7 @@ public class AnalysisJob {
                     Double tradeCurHeatNumber = 0.00;
                     Double tradeHeatPower = 0.00;
                     Double tradeWdc = 0.00;
-                    if(!devlasteststates.isEmpty()) {
+                    if(devlasteststates != null && !devlasteststates.isEmpty()) {
                         logger.debug("------------------------------该热力站贸易系统对应的数据:" + devlasteststates.toString() + "---------------------------------");
                         for (Devlasteststate devlasteststate : devlasteststates) {
                             tradeCurHeatNumber += devlasteststate.getCurheatnum();
@@ -133,7 +133,7 @@ public class AnalysisJob {
                     Double lorawanCurHeatNumber = 0.00;
                     Double lorawanHeatPower = 0.00;
                     Double lorawanWdc = 0.00;
-                    if(!lorawans.isEmpty()) {
+                    if(lorawans != null && !lorawans.isEmpty()) {
                         logger.debug("------------------------------该热力站lorawan系统对应的数据:" + lorawans.toString() + "---------------------------------");
                         for (HmNormaldecodedata lorawan : lorawans) {
                             lorawanCurHeatNumber += lorawan.getCurrentheatnumber();

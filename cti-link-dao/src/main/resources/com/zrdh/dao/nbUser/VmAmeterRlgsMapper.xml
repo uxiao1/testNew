@@ -6,7 +6,7 @@
         <result column="Meter_no" property="meter_no" jdbcType="VARCHAR" />
         <result column="Meter_no_cb" property="meter_no_cb" jdbcType="VARCHAR" />
         <result column="Cjq_time" property="cjq_time" jdbcType="TIMESTAMP" />
-        <result column="Cjqcjtime" property="cjqcjTime" jdbcType="TIMESTAMP" />
+        <result column="Cjqcjtime" property="cjqcjTime" jdbcType="VARCHAR" />
         <result column="Dqrl" property="dqrl" jdbcType="REAL" />
         <result column="Ljll" property="ljll" jdbcType="REAL" />
         <result column="Gl" property="gl" jdbcType="REAL" />

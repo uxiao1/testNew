@@ -68,7 +68,7 @@ public class DataAnalyzeServiceImpl implements DataAnalyzeService {
             String name = plots.get(i).getName();
             address.add(name);
         }
-        if(address.isEmpty()){
+        if(address == null || address.isEmpty()){
             return null;
         }
         if (address.size() > 2000) {
@@ -85,7 +85,7 @@ public class DataAnalyzeServiceImpl implements DataAnalyzeService {
                     tempList.add(address.get(i));
                 }
                 start = start + end;
-                if (!tempList.isEmpty()) {
+                if (tempList != null && !tempList.isEmpty()) {
                     List<Cardnumberaddress> tempResult = cardnumberaddressMapper.selectByBoroughNames(tempList);
                     cardnumberaddresses.addAll(tempResult);
                 }
@@ -128,7 +128,7 @@ public class DataAnalyzeServiceImpl implements DataAnalyzeService {
     @Override
     public HashMap<String, ArrayList> findFirstLeakageNumAndTimeByBeginTime2EndTime(Date begin, Date end) {
         List<FirstLevelLeakage> firstLevelLeakageList = firstLevelLeakageMapper.selectBetweenBeginAndEnd(begin,end);
-        if(!firstLevelLeakageList.isEmpty()) {
+        if(firstLevelLeakageList != null && !firstLevelLeakageList.isEmpty()) {
             ArrayList<Double> leakageNumList = new ArrayList<>();
             ArrayList<Date> timeList = new ArrayList<>();
             for (FirstLevelLeakage firstLevelLeakage : firstLevelLeakageList) {
@@ -147,7 +147,7 @@ public class DataAnalyzeServiceImpl implements DataAnalyzeService {
     public HashMap<String, ArrayList> findSecondLeakageNumAndTimeByBeginTime2EndTime(Date begin, Date end) {
         //从二级漏损汇总表中取数据
         List<SecondLevelLeakageSum> secondLevelLeakageSumList = secondLevelLeakageSumMapper.selectBetweenBeginAndEnd(begin,end);
-        if(!secondLevelLeakageSumList.isEmpty()){
+        if(secondLevelLeakageSumList != null && !secondLevelLeakageSumList.isEmpty()){
             ArrayList<Double> leakageNumList = new ArrayList<>();
             ArrayList<Date> timeList = new ArrayList<>();
             for (SecondLevelLeakageSum leakageSum : secondLevelLeakageSumList) {
@@ -165,7 +165,7 @@ public class DataAnalyzeServiceImpl implements DataAnalyzeService {
     @Override
     public HashMap<String, ArrayList> findFirstHeatNumAndTimeByBeginTime2EndTime(Date begin, Date end) {
         List<FirstLevelLeakage> firstLevelLeakageList = firstLevelLeakageMapper.selectBetweenBeginAndEnd(begin,end);
-        if(!firstLevelLeakageList.isEmpty()) {
+        if(firstLevelLeakageList != null && !firstLevelLeakageList.isEmpty()) {
             ArrayList<Double> heatNumList = new ArrayList<>();
             ArrayList<Date> timeList = new ArrayList<>();
             for (FirstLevelLeakage firstLevelLeakage : firstLevelLeakageList) {
@@ -184,7 +184,7 @@ public class DataAnalyzeServiceImpl implements DataAnalyzeService {
     public HashMap<String, ArrayList> findSecondHeatNumAndTimeByBeginTime2EndTime(Date begin, Date end) {
         //从二级漏损汇总表中取数据
         List<SecondLevelLeakageSum> secondLevelLeakageSumList = secondLevelLeakageSumMapper.selectBetweenBeginAndEnd(begin,end);
-        if(!secondLevelLeakageSumList.isEmpty()){
+        if(secondLevelLeakageSumList != null && !secondLevelLeakageSumList.isEmpty()){
             ArrayList<Double> heatNumList = new ArrayList<>();
             ArrayList<Float> heatPowerList = new ArrayList<>();
             ArrayList<Float> wdcList = new ArrayList<>();

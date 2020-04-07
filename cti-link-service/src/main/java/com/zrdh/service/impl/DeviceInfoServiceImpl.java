@@ -56,7 +56,7 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
         String temperature = "";
         Gson gson = new Gson();
         HashMap temperatureMap = gson.fromJson(returnJson, HashMap.class);
-        if(!temperatureMap.isEmpty()){
+        if(temperatureMap != null && !temperatureMap.isEmpty()){
             ArrayList<LinkedTreeMap<String,String>> result = (ArrayList<LinkedTreeMap<String, String>>) temperatureMap.get("result");
             ArrayList<HashMap<String,String>> diffTime = new ArrayList<HashMap<String,String>>();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -72,7 +72,7 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
                     e.printStackTrace();
                 }
             }
-            if(!diffTime.isEmpty()){
+            if(diffTime != null && !diffTime.isEmpty()){
                 Collections.sort(diffTime, new Comparator<HashMap<String, String>>() {
                     @Override
                     public int compare(HashMap<String, String> o1, HashMap<String, String> o2) {
@@ -90,7 +90,8 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     @Override
     public Map<String,List<AlarmInfo>> queryforAlarmInfo(AlarmConditions alarmConditions) {
         if(alarmConditions == null){
-            return null;
+//            return null;
+            alarmConditions = new AlarmConditions();
         }
         //查询指定分区,带入数据库查询
         alarmConditions.setPartition(LorawanPartition.getPartitionByDate(new Date()));
